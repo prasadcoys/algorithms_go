@@ -67,3 +67,7 @@ func TestIfPointerMovementWorksIfTheswapIsToHappenAfterTheMiddle(t *testing.T) {
 		t.FailNow()
 	}
 }
+
+func TestIfPartitionWorks(t *testing.T) {
+
+}
