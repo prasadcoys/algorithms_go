@@ -29,3 +29,12 @@ func (d *DynamicArray) RemoveAt(index int) {
 	copy(d.elements[index:], d.elements[index+1:])
 	d.elements = d.elements[:len(d.elements)-1]
 }
+
+func (d *DynamicArray) Remove(element int) {
+	for i := 0; i < len(d.elements); i++ {
+		if d.elements[i] == element {
+			d.RemoveAt(i)
+			break
+		}
+	}
+}

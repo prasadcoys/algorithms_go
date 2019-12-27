@@ -1,7 +1,6 @@
 package datastructures
 
 import (
-	"fmt"
 	"testing"
 )
 
@@ -65,10 +64,22 @@ func TestIfAddOfElementWorks(t *testing.T) {
 	}
 }
 
-func TestIfRemovalOfElementWorks(t *testing.T) {
+func TestIfRemovalAtIndexWorks(t *testing.T) {
 	numbers := &DynamicArray{}
 	numbers.elements = []int{1, 2, 3, 4, 5}
-	fmt.Println(numbers.elements)
+	numbers.RemoveAt(3)
+	if numbers.Get(3) != 5 {
+		t.FailNow()
+	}
+	if numbers.Size() != 4 {
+		t.FailNow()
+	}
+}
+
+func TestIfRemoveOfElementWorks(t *testing.T) {
+	numbers := &DynamicArray{}
+	numbers.elements = []int{1, 2, 3, 4, 5}
+	numbers.Remove(4)
 	if numbers.Get(3) != 5 {
 		t.FailNow()
 	}
