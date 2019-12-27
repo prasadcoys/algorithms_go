@@ -1,6 +1,9 @@
 package datastructures
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+)
 
 func TestIfCreationOfNewDynamicArrayWorks(t *testing.T) {
 	numbers := &DynamicArray{}
@@ -37,6 +40,39 @@ func TestGetAtIndex(t *testing.T) {
 	numbers := &DynamicArray{}
 	numbers.elements = []int{1, 2, 3}
 	if numbers.Get(2) != 3 {
+		t.FailNow()
+	}
+}
+
+func TestSetAtIndex(t *testing.T) {
+	numbers := &DynamicArray{}
+	numbers.elements = []int{1, 2, 3, 4, 5}
+	numbers.SetAt(4, 10)
+	if numbers.Get(4) != 10 {
+		t.FailNow()
+	}
+}
+
+func TestIfAddOfElementWorks(t *testing.T) {
+	numbers := &DynamicArray{}
+	numbers.elements = []int{1, 2, 3, 4, 5}
+	numbers.Add(10)
+	if numbers.Get(5) != 10 {
+		t.FailNow()
+	}
+	if numbers.Size() != 6 {
+		t.FailNow()
+	}
+}
+
+func TestIfRemovalOfElementWorks(t *testing.T) {
+	numbers := &DynamicArray{}
+	numbers.elements = []int{1, 2, 3, 4, 5}
+	fmt.Println(numbers.elements)
+	if numbers.Get(3) != 5 {
+		t.FailNow()
+	}
+	if numbers.Size() != 4 {
 		t.FailNow()
 	}
 }
