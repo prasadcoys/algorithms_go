@@ -87,3 +87,27 @@ func TestIfRemoveOfElementWorks(t *testing.T) {
 		t.FailNow()
 	}
 }
+
+func TestIfIndexOfElementInArrayWorks(t *testing.T) {
+	numbers := &DynamicArray{}
+	numbers.elements = []int{1, 2, 3, 4, 5}
+	if numbers.IndexOf(3) != 2 {
+		t.FailNow()
+	}
+}
+
+func TestIfIndexOfNonExistingElementWorks(t *testing.T) {
+	numbers := &DynamicArray{}
+	numbers.elements = []int{1, 2, 3, 4, 5}
+	if numbers.IndexOf(10) != -1 {
+		t.FailNow()
+	}
+}
+
+func TestIfArrayContainsElementWorks(t *testing.T) {
+	numbers := &DynamicArray{}
+	numbers.elements = []int{1, 2, 3, 4, 5}
+	if !numbers.Contains(3) {
+		t.FailNow()
+	}
+}

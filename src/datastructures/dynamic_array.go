@@ -31,10 +31,20 @@ func (d *DynamicArray) RemoveAt(index int) {
 }
 
 func (d *DynamicArray) Remove(element int) {
+	if d.IndexOf(element) != -1 {
+		d.RemoveAt(d.IndexOf(element))
+	}
+}
+
+func (d *DynamicArray) IndexOf(element int) int {
 	for i := 0; i < len(d.elements); i++ {
 		if d.elements[i] == element {
-			d.RemoveAt(i)
-			break
+			return i
 		}
 	}
+	return -1
+}
+
+func (d *DynamicArray) Contains(element int) bool {
+	return d.IndexOf(element) != -1
 }
