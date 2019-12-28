@@ -1,5 +1,9 @@
 package datastructures
 
+import (
+	"errors"
+)
+
 type LinkedList struct {
 	Head *Node
 }
@@ -42,20 +46,29 @@ func (l *LinkedList) IsEmpty() bool {
 	return false
 }
 
-func (l *LinkedList) AddAt(index int, data int) {
+func (l *LinkedList) AddAt(index int, data int) error {
 	currentNode := l.Head
 	nextNode := currentNode.Next
 	currentPosition := 1
+	if index < 0 {
+		return errors.New("Index out of bounds")
+	}
 	for {
+		if currentNode.Next == nil {
+			return errors.New("Index out of bounds")
+		}
 		if currentPosition+1 == index {
 			nodeToBeInserted := CreateNode(data)
 			currentNode.Next = &nodeToBeInserted
 			nodeToBeInserted.Next = nextNode
-			return
+			return nil
 		}
+
 		currentNode = currentNode.Next
 		nextNode = currentNode.Next
+		currentPosition++
 	}
+	return nil
 }
 
 func (l *LinkedList) Clear() {
@@ -67,4 +80,45 @@ func CreateNode(data int) Node {
 		Data: data,
 		Next: nil,
 	}
+}
+
+func (l *LinkedList) PeekFirst() (int, error) {
+	if l.Head != nil {
+		return l.Head.Data, nil
+	}
+	return -1, errors.New("Head not set")
+}
+
+func (l *LinkedList) RemoveAt(index int) error {
+	if l.Head == nil {
+		return errors.New("Empty list")
+	}
+	if index == 1 {
+		l.Head = l.Head.Next
+		return nil
+	}
+	currentNode := l.Head
+	nextNode := l.Head.Next
+	currentPosition := 1
+	for {
+		if currentPosition+1 == index {
+			currentNode.Next = nextNode.Next
+			nextNode = nil
+			break
+		}
+		currentNode = currentNode.Next
+		nextNode = currentNode.Next
+		currentPosition++
+	}
+	return nil
+}
+
+func (l *LinkedList) RemoveFirst() error {
+
+	return l.RemoveAt(1)
+
+}
+
+func (l *LinkedList) RemoveLast() error {
+	return l.RemoveAt(l.Size())
 }
