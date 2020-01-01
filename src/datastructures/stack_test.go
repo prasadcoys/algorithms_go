@@ -1,7 +1,6 @@
 package datastructures
 
 import (
-	"fmt"
 	"testing"
 )
 
@@ -28,5 +27,46 @@ func TestIfPopFromStackWorks(t *testing.T) {
 		t.FailNow()
 	}
 	topData, _ = stack.Pop()
-	fmt.Println(topData)
+	if topData != -1 {
+		t.FailNow()
+	}
+}
+
+func TestIfPushAndPopOfMultipleElementsWorks(t *testing.T) {
+	stack := Stack{}
+	stack.Push(2)
+	stack.Push(3)
+	stack.Push(5)
+	top, _ := stack.Pop()
+	if top != 5 {
+		t.FailNow()
+	}
+	top, _ = stack.Pop()
+	if top != 3 {
+		t.FailNow()
+	}
+	top, _ = stack.Pop()
+	if top != 2 {
+		t.FailNow()
+	}
+}
+
+func TestIsEmpty(t *testing.T) {
+	stack := Stack{}
+	if !stack.IsEmpty() {
+		t.FailNow()
+	}
+	stack.Push(2)
+	if stack.IsEmpty() {
+		t.FailNow()
+	}
+}
+
+func TestPeek(t *testing.T) {
+	stack := Stack{}
+	stack.Push(2)
+	stack.Push(3)
+	if stack.Peek() != 3 {
+		t.FailNow()
+	}
 }
