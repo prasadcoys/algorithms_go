@@ -47,6 +47,18 @@ func (l *LinkedList) IsEmpty() bool {
 }
 
 func (l *LinkedList) AddAt(index int, data int) error {
+
+	if l.Head == nil {
+		head := CreateNode(data)
+		l.Head = &head
+		return nil
+	}
+	if index == 1 {
+		node := CreateNode(data)
+		node.Next = l.Head
+		l.Head = &node
+		return nil
+	}
 	currentNode := l.Head
 	nextNode := currentNode.Next
 	currentPosition := 1
@@ -68,7 +80,6 @@ func (l *LinkedList) AddAt(index int, data int) error {
 		nextNode = currentNode.Next
 		currentPosition++
 	}
-	return nil
 }
 
 func (l *LinkedList) Clear() {

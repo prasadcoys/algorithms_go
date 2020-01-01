@@ -130,6 +130,24 @@ func TestIfAddAtIndexWorksCorrectly(t *testing.T) {
 	}
 }
 
+func TestIfAddAtIndexWorksCorrectlyOnEmptyList(t *testing.T) {
+	list := LinkedList{}
+	list.AddAt(1, 4)
+	if list.Size() != 1 {
+		t.FailNow()
+	}
+	if list.Head.Data != 4 {
+		t.FailNow()
+	}
+	list.AddAt(1, 5)
+	if list.Size() != 2 {
+		t.FailNow()
+	}
+	if list.Head.Data != 5 {
+		t.FailNow()
+	}
+}
+
 func TestIfAddAtOutofBoundsIndex_lower_ThrowsError(t *testing.T) {
 	nodeOne := CreateNode(1)
 	list := LinkedList{
