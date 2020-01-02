@@ -170,6 +170,11 @@ func (d *DoublyLinkedList) RemoveFirst() error {
 	if d.Head == nil {
 		return errors.New("List not initialised")
 	}
+	if d.Head.Next == nil {
+		d.Head = nil
+		d.size--
+		return nil
+	}
 	d.Head = d.Head.Next
 	d.Head.Prev = nil
 	d.size--
