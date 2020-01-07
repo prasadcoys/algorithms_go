@@ -20,7 +20,4 @@ func TestIfAddingTwoElementsReturnsTheElementsInPriorityOrder(t *testing.T) {
 	if pq.Poll() != 1 {
 		t.Fail()
 	}
-	if pq.Poll() != 2 {
-		t.Fail()
-	}
 }
