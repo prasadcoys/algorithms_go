@@ -5,7 +5,19 @@ type PriorityQueue struct {
 }
 
 func (p *PriorityQueue) Add(element int) {
+	currentIndex := len(p.heap)
 	p.heap = append(p.heap, element)
+	for {
+		var parentIndex int
+		parentIndex = (currentIndex - 1) / 2
+		if p.heap[currentIndex] >= p.heap[parentIndex] {
+			break
+		}
+		temp := p.heap[currentIndex]
+		p.heap[currentIndex] = p.heap[parentIndex]
+		p.heap[parentIndex] = temp
+		currentIndex = parentIndex
+	}
 }
 
 func (p *PriorityQueue) Poll() int {
