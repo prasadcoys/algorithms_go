@@ -148,5 +148,18 @@ func TestIfTreeContainsReturnsFalseOnEmptyTree(t *testing.T) {
 }
 
 func TestIfSizeOfEmptyBinarySearchTreeReturnsZero(t *testing.T) {
+	binaryTree := BinarySearchTree{}
+	if binaryTree.Size() != 0 {
+		t.Fail()
+	}
+}
 
+func TestIfSizeOfNonEmptyBinarySearchTreeReturnsCorrectSize(t *testing.T) {
+	binaryTree := BinarySearchTree{}
+	binaryTree.Add(&BSTNode{data: 5})
+	binaryTree.Add(&BSTNode{data: 2})
+	binaryTree.Add(&BSTNode{data: 7})
+	if binaryTree.Size() != 3 {
+		t.Fail()
+	}
 }

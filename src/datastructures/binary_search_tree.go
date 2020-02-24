@@ -8,11 +8,13 @@ type BSTNode struct {
 
 type BinarySearchTree struct {
 	root *BSTNode
+	size int
 }
 
 func (b *BinarySearchTree) Add(node *BSTNode) {
 	if b.root == nil {
 		b.root = node
+		b.size = b.size + 1
 		return
 	}
 	b.addNode(node, b.root)
@@ -23,6 +25,7 @@ func (b *BinarySearchTree) addNode(node *BSTNode, currentRoot *BSTNode) {
 	if node.data < currentRoot.data {
 		if currentRoot.left == nil {
 			currentRoot.left = node
+			b.size = b.size + 1
 		} else {
 			b.addNode(node, currentRoot.left)
 		}
@@ -30,6 +33,7 @@ func (b *BinarySearchTree) addNode(node *BSTNode, currentRoot *BSTNode) {
 	} else if node.data > currentRoot.data {
 		if currentRoot.right == nil {
 			currentRoot.right = node
+			b.size = b.size + 1
 		} else {
 			b.addNode(node, currentRoot.right)
 		}
@@ -54,4 +58,8 @@ func (b *BinarySearchTree) containsNode(value int, currentRoot *BSTNode) bool {
 	} else {
 		return b.containsNode(value, currentRoot.right)
 	}
+}
+
+func (b *BinarySearchTree) Size() int {
+	return b.size
 }
