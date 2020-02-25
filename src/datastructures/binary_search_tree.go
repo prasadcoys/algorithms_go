@@ -63,3 +63,22 @@ func (b *BinarySearchTree) containsNode(value int, currentRoot *BSTNode) bool {
 func (b *BinarySearchTree) Size() int {
 	return b.size
 }
+
+func (b *BinarySearchTree) Height() int {
+	return calculateHeight(b.root)
+}
+
+func calculateHeight(rootNode *BSTNode) int {
+	if rootNode == nil {
+		return 0
+	} else {
+		leftSubtreeHeight := calculateHeight(rootNode.left)
+		rightSubtreeHeight := calculateHeight(rootNode.right)
+		if leftSubtreeHeight >= rightSubtreeHeight {
+			return 1 + leftSubtreeHeight
+		} else {
+			return 1 + rightSubtreeHeight
+		}
+	}
+
+}

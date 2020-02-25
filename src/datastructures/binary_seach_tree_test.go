@@ -163,3 +163,88 @@ func TestIfSizeOfNonEmptyBinarySearchTreeReturnsCorrectSize(t *testing.T) {
 		t.Fail()
 	}
 }
+
+func TestIfHeightOfABinaryTreeWithOneNodeIsCalculatedCorrectly(t *testing.T) {
+	binaryTree := BinarySearchTree{}
+	binaryTree.Add(&BSTNode{data: 5})
+	if binaryTree.Height() != 1 {
+		t.Fail()
+	}
+}
+
+func TestIfHeightOfATreeWithOneRootAndALeftLeafIsCalculatedCorrectly(t *testing.T) {
+	binaryTree := BinarySearchTree{}
+	binaryTree.Add(&BSTNode{data: 5})
+	binaryTree.Add(&BSTNode{data: 2})
+	if binaryTree.Height() != 2 {
+		t.Fail()
+	}
+}
+
+func TestIfHeightOfABInaryTreeWithRootAndOneLeftAndOneRightLeaf(t *testing.T) {
+	binaryTree := BinarySearchTree{}
+	binaryTree.Add(&BSTNode{data: 5})
+	binaryTree.Add(&BSTNode{data: 9})
+	binaryTree.Add(&BSTNode{data: 2})
+	if binaryTree.Height() != 2 {
+		t.Fail()
+	}
+}
+
+func TestIfHeightOfATreeWithOneRootAndARightLeafIsCalculatedCorrectly(t *testing.T) {
+	binaryTree := BinarySearchTree{}
+	binaryTree.Add(&BSTNode{data: 5})
+	binaryTree.Add(&BSTNode{data: 9})
+	if binaryTree.Height() != 2 {
+		t.Fail()
+	}
+}
+
+func TestIfHeightOFABalancedTreeIsCalculatedCorrectly(t *testing.T) {
+	binaryTree := BinarySearchTree{}
+	binaryTree.Add(&BSTNode{data: 11})
+	binaryTree.Add(&BSTNode{data: 6})
+	binaryTree.Add(&BSTNode{data: 15})
+	binaryTree.Add(&BSTNode{data: 3})
+	binaryTree.Add(&BSTNode{data: 8})
+	binaryTree.Add(&BSTNode{data: 13})
+	binaryTree.Add(&BSTNode{data: 17})
+	binaryTree.Add(&BSTNode{data: 1})
+	binaryTree.Add(&BSTNode{data: 5})
+	binaryTree.Add(&BSTNode{data: 12})
+	binaryTree.Add(&BSTNode{data: 14})
+	binaryTree.Add(&BSTNode{data: 19})
+	if binaryTree.Height() != 4 {
+		t.Fail()
+	}
+
+}
+
+func TestIfHeighOfATreeWithALeftHeavySubtreeIsCalculatedCorrectly(t *testing.T) {
+	binaryTree := BinarySearchTree{}
+	binaryTree.Add(&BSTNode{data: 11})
+	binaryTree.Add(&BSTNode{data: 6})
+	binaryTree.Add(&BSTNode{data: 15})
+	binaryTree.Add(&BSTNode{data: 3})
+	binaryTree.Add(&BSTNode{data: 8})
+	if binaryTree.Height() != 3 {
+		t.Fail()
+	}
+}
+
+func TestIfHeighOfATreeWithARightHeavySubtreeIsCalculatedCorrectly(t *testing.T) {
+	binaryTree := BinarySearchTree{}
+	binaryTree.Add(&BSTNode{data: 11})
+	binaryTree.Add(&BSTNode{data: 6})
+	binaryTree.Add(&BSTNode{data: 15})
+	binaryTree.Add(&BSTNode{data: 3})
+	binaryTree.Add(&BSTNode{data: 8})
+	binaryTree.Add(&BSTNode{data: 13})
+	binaryTree.Add(&BSTNode{data: 17})
+	binaryTree.Add(&BSTNode{data: 12})
+	binaryTree.Add(&BSTNode{data: 14})
+	binaryTree.Add(&BSTNode{data: 19})
+	if binaryTree.Height() != 4 {
+		t.Fail()
+	}
+}
