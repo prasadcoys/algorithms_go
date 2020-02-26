@@ -6,6 +6,23 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+func CreateBigBinaryTree() BinarySearchTree {
+	binaryTree := BinarySearchTree{}
+	binaryTree.Add(&BSTNode{data: 11})
+	binaryTree.Add(&BSTNode{data: 6})
+	binaryTree.Add(&BSTNode{data: 15})
+	binaryTree.Add(&BSTNode{data: 3})
+	binaryTree.Add(&BSTNode{data: 8})
+	binaryTree.Add(&BSTNode{data: 13})
+	binaryTree.Add(&BSTNode{data: 17})
+	binaryTree.Add(&BSTNode{data: 1})
+	binaryTree.Add(&BSTNode{data: 5})
+	binaryTree.Add(&BSTNode{data: 12})
+	binaryTree.Add(&BSTNode{data: 14})
+	binaryTree.Add(&BSTNode{data: 19})
+	return binaryTree
+}
+
 func TestIfBinarySearchTreeNodeCanBeCreated(t *testing.T) {
 	node := BSTNode{data: 23}
 	assert.Equal(t, 23, node.data)
@@ -201,19 +218,7 @@ func TestIfHeightOfATreeWithOneRootAndARightLeafIsCalculatedCorrectly(t *testing
 }
 
 func TestIfHeightOFABalancedTreeIsCalculatedCorrectly(t *testing.T) {
-	binaryTree := BinarySearchTree{}
-	binaryTree.Add(&BSTNode{data: 11})
-	binaryTree.Add(&BSTNode{data: 6})
-	binaryTree.Add(&BSTNode{data: 15})
-	binaryTree.Add(&BSTNode{data: 3})
-	binaryTree.Add(&BSTNode{data: 8})
-	binaryTree.Add(&BSTNode{data: 13})
-	binaryTree.Add(&BSTNode{data: 17})
-	binaryTree.Add(&BSTNode{data: 1})
-	binaryTree.Add(&BSTNode{data: 5})
-	binaryTree.Add(&BSTNode{data: 12})
-	binaryTree.Add(&BSTNode{data: 14})
-	binaryTree.Add(&BSTNode{data: 19})
+	binaryTree := CreateBigBinaryTree()
 	if binaryTree.Height() != 4 {
 		t.Fail()
 	}
@@ -247,4 +252,32 @@ func TestIfHeighOfATreeWithARightHeavySubtreeIsCalculatedCorrectly(t *testing.T)
 	if binaryTree.Height() != 4 {
 		t.Fail()
 	}
+}
+
+func TestIfPreOrderTraversalOfARootWorksCorrectly(t *testing.T) {
+	binaryTree := BinarySearchTree{}
+	binaryTree.Add(&BSTNode{data: 1})
+	traversalEntries := []int{1}
+	assert.Equal(t, traversalEntries, binaryTree.TraversePreOrder())
+}
+
+func TestIfPreOrderTraversalOfARootWithOneLevelCHildrenWorksCorrectly(t *testing.T) {
+	binaryTree := BinarySearchTree{}
+	binaryTree.Add(&BSTNode{data: 3})
+	binaryTree.Add(&BSTNode{data: 1})
+	binaryTree.Add(&BSTNode{data: 5})
+	traversalEntries := []int{3, 1, 5}
+	assert.Equal(t, traversalEntries, binaryTree.TraversePreOrder())
+}
+
+func TestIfPreOrderTraversalOfARootWithMultipleLevelsOfChildreWorksCorrectly(t *testing.T) {
+	binaryTree := CreateBigBinaryTree()
+	traversalEntries := []int{11, 6, 3, 1, 5, 8, 15, 13, 12, 14, 17, 19}
+	assert.Equal(t, traversalEntries, binaryTree.TraversePreOrder())
+}
+
+func TestIfPreOrderTraversalForAnEmptyTree(t *testing.T) {
+	binaryTree := BinarySearchTree{}
+	traversalEntries := []int{}
+	assert.Equal(t, traversalEntries, binaryTree.TraversePreOrder())
 }

@@ -82,3 +82,18 @@ func calculateHeight(rootNode *BSTNode) int {
 	}
 
 }
+
+func (b *BinarySearchTree) TraversePreOrder() []int {
+	elements := []int{}
+	b.PreOrderTraverseFromNodeAndUpdateSlice(b.root, &elements)
+	return elements
+}
+
+func (b *BinarySearchTree) PreOrderTraverseFromNodeAndUpdateSlice(currentRoot *BSTNode, elementsTraversedSoFar *[]int) {
+	if currentRoot == nil {
+	} else {
+		*elementsTraversedSoFar = append(*elementsTraversedSoFar, currentRoot.data)
+		b.PreOrderTraverseFromNodeAndUpdateSlice(currentRoot.left, elementsTraversedSoFar)
+		b.PreOrderTraverseFromNodeAndUpdateSlice(currentRoot.right, elementsTraversedSoFar)
+	}
+}
