@@ -261,7 +261,7 @@ func TestIfPreOrderTraversalOfARootWorksCorrectly(t *testing.T) {
 	assert.Equal(t, traversalEntries, binaryTree.TraversePreOrder())
 }
 
-func TestIfPreOrderTraversalOfARootWithOneLevelCHildrenWorksCorrectly(t *testing.T) {
+func TestIfInOrderTraversalOfARootWithOneLevelCHildrenWorksCorrectly(t *testing.T) {
 	binaryTree := BinarySearchTree{}
 	binaryTree.Add(&BSTNode{data: 3})
 	binaryTree.Add(&BSTNode{data: 1})
@@ -280,4 +280,40 @@ func TestIfPreOrderTraversalForAnEmptyTree(t *testing.T) {
 	binaryTree := BinarySearchTree{}
 	traversalEntries := []int{}
 	assert.Equal(t, traversalEntries, binaryTree.TraversePreOrder())
+}
+
+func TestIfInorderTraversalOfASingleNodeTreeWorks(t *testing.T) {
+	binaryTree := BinarySearchTree{}
+	traversalEntries := []int{}
+	assert.Equal(t, traversalEntries, binaryTree.TraverseInOrder())
+}
+
+func TestIfPreOrderTraversalOfARootWithOneLevelCHildrenWorksCorrectly(t *testing.T) {
+	binaryTree := BinarySearchTree{}
+	binaryTree.Add(&BSTNode{data: 3})
+	binaryTree.Add(&BSTNode{data: 1})
+	binaryTree.Add(&BSTNode{data: 5})
+	traversalEntries := []int{1, 3, 5}
+	assert.Equal(t, traversalEntries, binaryTree.TraverseInOrder())
+}
+
+func TestIfInOrderTraversalOfABigTreeWorksCorrectly(t *testing.T) {
+	binaryTree := CreateBigBinaryTree()
+	traversalEntries := []int{1, 3, 5, 6, 8, 11, 12, 13, 14, 15, 17, 19}
+	assert.Equal(t, traversalEntries, binaryTree.TraverseInOrder())
+}
+
+func TestIfPostOrderTraversalOfASingleRootTreeWorksCorrectly(t *testing.T) {
+	binaryTree := BinarySearchTree{}
+	binaryTree.Add(&BSTNode{data: 3})
+	binaryTree.Add(&BSTNode{data: 1})
+	binaryTree.Add(&BSTNode{data: 5})
+	traversalEntries := []int{1, 5, 3}
+	assert.Equal(t, traversalEntries, binaryTree.TraversePostOrder())
+}
+
+func TestIfPostOrderTraversalOfABigTreeWorksCorrectly(t *testing.T) {
+	binaryTree := CreateBigBinaryTree()
+	traversalEntries := []int{1, 5, 3, 8, 6, 12, 14, 13, 19, 17, 15, 11}
+	assert.Equal(t, traversalEntries, binaryTree.TraversePostOrder())
 }

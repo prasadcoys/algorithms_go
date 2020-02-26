@@ -97,3 +97,36 @@ func (b *BinarySearchTree) PreOrderTraverseFromNodeAndUpdateSlice(currentRoot *B
 		b.PreOrderTraverseFromNodeAndUpdateSlice(currentRoot.right, elementsTraversedSoFar)
 	}
 }
+
+func (b *BinarySearchTree) TraverseInOrder() []int {
+	elements := []int{}
+	b.InOrderTraverseFromNodeAndUpdateSlice(b.root, &elements)
+	return elements
+}
+
+func (b *BinarySearchTree) InOrderTraverseFromNodeAndUpdateSlice(currentRoot *BSTNode, elementsTraversedSoFar *[]int) {
+	if currentRoot == nil {
+	} else {
+		b.InOrderTraverseFromNodeAndUpdateSlice(currentRoot.left, elementsTraversedSoFar)
+		*elementsTraversedSoFar = append(*elementsTraversedSoFar, currentRoot.data)
+		b.InOrderTraverseFromNodeAndUpdateSlice(currentRoot.right, elementsTraversedSoFar)
+	}
+}
+
+func (b *BinarySearchTree) TraversePostOrder() []int {
+	elements := []int{}
+	b.PostOrderTraverseFromNodeAndUpdateSlice(b.root, &elements)
+	return elements
+}
+
+func (b *BinarySearchTree) PostOrderTraverseFromNodeAndUpdateSlice(currentRoot *BSTNode, elementsTraversedSoFar *[]int) {
+	if currentRoot == nil {
+
+	} else {
+		b.PostOrderTraverseFromNodeAndUpdateSlice(currentRoot.left, elementsTraversedSoFar)
+		b.PostOrderTraverseFromNodeAndUpdateSlice(currentRoot.right, elementsTraversedSoFar)
+		*elementsTraversedSoFar = append(*elementsTraversedSoFar, currentRoot.data)
+
+	}
+
+}
