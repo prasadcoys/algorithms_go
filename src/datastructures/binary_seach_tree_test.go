@@ -317,3 +317,9 @@ func TestIfPostOrderTraversalOfABigTreeWorksCorrectly(t *testing.T) {
 	traversalEntries := []int{1, 5, 3, 8, 6, 12, 14, 13, 19, 17, 15, 11}
 	assert.Equal(t, traversalEntries, binaryTree.TraversePostOrder())
 }
+
+func TestIfLevelOrderTraversalOfANormalTreeWorksCorrectly(t *testing.T) {
+	binaryTree := CreateBigBinaryTree()
+	traversalEntries := []int{11, 6, 15, 3, 8, 13, 17, 1, 5, 12, 14, 19}
+	assert.Equal(t, traversalEntries, binaryTree.TraverseLevelOrder())
+}

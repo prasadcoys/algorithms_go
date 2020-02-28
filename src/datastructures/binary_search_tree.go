@@ -130,3 +130,13 @@ func (b *BinarySearchTree) PostOrderTraverseFromNodeAndUpdateSlice(currentRoot *
 	}
 
 }
+
+func (b *BinarySearchTree) TraverseLevelOrder() []int {
+	elements := []int{}
+	b.LevelOrderTraverseFromNodeAndUpdateSlice(b.root, &elements)
+	return elements
+}
+
+func (b *BinarySearchTree) LevelOrderTraverseFromNodeAndUpdateSlice(currentRoot *BSTNode, elementsTraversedSoFar *[]int) {
+
+}
