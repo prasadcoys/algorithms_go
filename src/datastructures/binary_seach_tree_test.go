@@ -323,3 +323,16 @@ func TestIfLevelOrderTraversalOfANormalTreeWorksCorrectly(t *testing.T) {
 	traversalEntries := []int{11, 6, 15, 3, 8, 13, 17, 1, 5, 12, 14, 19}
 	assert.Equal(t, traversalEntries, binaryTree.TraverseLevelOrder())
 }
+
+func TestIfLevelOrderTraversalOfATreeWithOnlyOnenodeWoks(t *testing.T) {
+	binaryTree := BinarySearchTree{}
+	binaryTree.Add(&BSTNode{data: 11})
+	traversalEntries := []int{11}
+	assert.Equal(t, traversalEntries, binaryTree.TraverseLevelOrder())
+}
+
+func TestIfLevelOrderTraversalOfATreeWithNoOnenodeWoks(t *testing.T) {
+	binaryTree := BinarySearchTree{}
+	traversalEntries := []int{}
+	assert.Equal(t, traversalEntries, binaryTree.TraverseLevelOrder())
+}

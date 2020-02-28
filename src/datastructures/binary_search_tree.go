@@ -133,10 +133,26 @@ func (b *BinarySearchTree) PostOrderTraverseFromNodeAndUpdateSlice(currentRoot *
 
 func (b *BinarySearchTree) TraverseLevelOrder() []int {
 	elements := []int{}
-	b.LevelOrderTraverseFromNodeAndUpdateSlice(b.root, &elements)
+	nodesQueue := NodeQueue{}
+	if b.root == nil {
+		return elements
+	}
+	nodesQueue.Enqueue(b.root)
+	b.LevelOrderTraverseFromNodeAndUpdateSlice(&elements, &nodesQueue)
 	return elements
 }
 
-func (b *BinarySearchTree) LevelOrderTraverseFromNodeAndUpdateSlice(currentRoot *BSTNode, elementsTraversedSoFar *[]int) {
-
+func (b *BinarySearchTree) LevelOrderTraverseFromNodeAndUpdateSlice(elementsTraversedSoFar *[]int, nodesQueue *NodeQueue) {
+	if len(nodesQueue.dataqueue) == 0 {
+		return
+	}
+	currentNode := nodesQueue.Dequeue()
+	if currentNode.left != nil {
+		nodesQueue.Enqueue(currentNode.left)
+	}
+	if currentNode.right != nil {
+		nodesQueue.Enqueue(currentNode.right)
+	}
+	*elementsTraversedSoFar = append(*elementsTraversedSoFar, currentNode.data)
+	b.LevelOrderTraverseFromNodeAndUpdateSlice(elementsTraversedSoFar, nodesQueue)
 }
