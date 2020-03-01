@@ -336,3 +336,53 @@ func TestIfLevelOrderTraversalOfATreeWithNoOnenodeWoks(t *testing.T) {
 	traversalEntries := []int{}
 	assert.Equal(t, traversalEntries, binaryTree.TraverseLevelOrder())
 }
+
+func TestIfWeCanRemoveAnElementFromTree(t *testing.T) {
+	binaryTree := CreateBigBinaryTree()
+	binaryTree.Remove(19)
+	traversalEntries := []int{1, 3, 5, 6, 8, 11, 12, 13, 14, 15, 17}
+	assert.Equal(t, traversalEntries, binaryTree.TraverseInOrder())
+}
+
+func TestIfWeCanRemoveAnElementThatDoesNotHaveAnyLeftSubtreeWithParentOnLeft(t *testing.T) {
+	binaryTree := CreateBigBinaryTree()
+	binaryTree.Remove(17)
+	traversalEntries := []int{1, 3, 5, 6, 8, 11, 12, 13, 14, 15, 19}
+	assert.Equal(t, traversalEntries, binaryTree.TraverseInOrder())
+}
+
+func TestIfWeCanRemoveAnElementThatDoesNotHaveAnyLeftSubtreeWithParentOnRight(t *testing.T) {
+	binaryTree := BinarySearchTree{}
+	binaryTree.Add(&BSTNode{data: 11})
+	binaryTree.Add(&BSTNode{data: 6})
+	binaryTree.Add(&BSTNode{data: 15})
+	binaryTree.Add(&BSTNode{data: 8})
+	binaryTree.Remove(6)
+	traversalEntries := []int{8, 11, 15}
+	assert.Equal(t, traversalEntries, binaryTree.TraverseInOrder())
+}
+
+func TestIfWeCanRemoveAnElementThatDoesNotHaveAnyRightSubtreeWithParentOnLeft(t *testing.T) {
+	binaryTree := BinarySearchTree{}
+	binaryTree.Add(&BSTNode{data: 11})
+	binaryTree.Add(&BSTNode{data: 6})
+	binaryTree.Add(&BSTNode{data: 15})
+	binaryTree.Add(&BSTNode{data: 3})
+	binaryTree.Add(&BSTNode{data: 8})
+	binaryTree.Add(&BSTNode{data: 13})
+	binaryTree.Remove(15)
+	traversalEntries := []int{3, 6, 8, 11, 13}
+	assert.Equal(t, traversalEntries, binaryTree.TraverseInOrder())
+}
+
+func TestIfWeCanRemoveAnElementThatDoesNotHaveAnyRightSubtreeWithParentOnRight(t *testing.T) {
+	binaryTree := BinarySearchTree{}
+	binaryTree.Add(&BSTNode{data: 11})
+	binaryTree.Add(&BSTNode{data: 6})
+	binaryTree.Add(&BSTNode{data: 15})
+	binaryTree.Add(&BSTNode{data: 3})
+	binaryTree.Add(&BSTNode{data: 13})
+	binaryTree.Remove(6)
+	traversalEntries := []int{3, 11, 13, 15}
+	assert.Equal(t, traversalEntries, binaryTree.TraverseInOrder())
+}

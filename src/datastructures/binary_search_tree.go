@@ -156,3 +156,39 @@ func (b *BinarySearchTree) LevelOrderTraverseFromNodeAndUpdateSlice(elementsTrav
 	*elementsTraversedSoFar = append(*elementsTraversedSoFar, currentNode.data)
 	b.LevelOrderTraverseFromNodeAndUpdateSlice(elementsTraversedSoFar, nodesQueue)
 }
+
+func (b *BinarySearchTree) Remove(element int) bool {
+	if !b.Contains(element) {
+		return false
+	}
+	b.RemoveElement(element, b.root, nil)
+
+	return false
+}
+
+func (b *BinarySearchTree) RemoveElement(element int, currentNode *BSTNode, parentNode *BSTNode) {
+	if element == currentNode.data {
+		// actual remove code here.
+		removeNodeFromTree(currentNode, parentNode)
+	} else if element > currentNode.data {
+		b.RemoveElement(element, currentNode.right, currentNode)
+	} else {
+		b.RemoveElement(element, currentNode.left, currentNode)
+	}
+}
+
+func removeNodeFromTree(currentNode *BSTNode, parentNode *BSTNode) {
+	if currentNode.left == nil {
+		if parentNode.left == currentNode {
+			parentNode.left = currentNode.right
+		} else {
+			parentNode.right = currentNode.right
+		}
+	} else {
+		if parentNode.left == currentNode {
+			parentNode.left = currentNode.left
+		} else {
+			parentNode.right = currentNode.left
+		}
+	}
+}
