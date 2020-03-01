@@ -161,30 +161,38 @@ func (b *BinarySearchTree) Remove(element int) bool {
 	if !b.Contains(element) {
 		return false
 	}
-	b.RemoveElement(element, b.root, nil)
+	b.removeElement(element, b.root, nil)
 
 	return false
 }
 
-func (b *BinarySearchTree) RemoveElement(element int, currentNode *BSTNode, parentNode *BSTNode) {
+func (b *BinarySearchTree) removeElement(element int, currentNode *BSTNode, parentNode *BSTNode) {
 	if element == currentNode.data {
 		// actual remove code here.
-		removeNodeFromTree(currentNode, parentNode)
+		b.removeNodeFromTree(currentNode, parentNode)
 	} else if element > currentNode.data {
-		b.RemoveElement(element, currentNode.right, currentNode)
+		b.removeElement(element, currentNode.right, currentNode)
 	} else {
-		b.RemoveElement(element, currentNode.left, currentNode)
+		b.removeElement(element, currentNode.left, currentNode)
 	}
 }
 
-func removeNodeFromTree(currentNode *BSTNode, parentNode *BSTNode) {
+func (b *BinarySearchTree) removeNodeFromTree(currentNode *BSTNode, parentNode *BSTNode) {
 	if currentNode.left == nil {
+		if parentNode == nil {
+			b.root = currentNode.left
+			return
+		}
 		if parentNode.left == currentNode {
 			parentNode.left = currentNode.right
 		} else {
 			parentNode.right = currentNode.right
 		}
 	} else {
+		if parentNode == nil {
+			b.root = currentNode.left
+			return
+		}
 		if parentNode.left == currentNode {
 			parentNode.left = currentNode.left
 		} else {

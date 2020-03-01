@@ -386,3 +386,23 @@ func TestIfWeCanRemoveAnElementThatDoesNotHaveAnyRightSubtreeWithParentOnRight(t
 	traversalEntries := []int{3, 11, 13, 15}
 	assert.Equal(t, traversalEntries, binaryTree.TraverseInOrder())
 }
+
+func TestIfWeCanRemoveTheRootWhichDoesNotHaveARightSubtree(t *testing.T) {
+	binaryTree := BinarySearchTree{}
+	binaryTree.Add(&BSTNode{data: 11})
+	binaryTree.Add(&BSTNode{data: 6})
+	binaryTree.Add(&BSTNode{data: 3})
+	binaryTree.Remove(11)
+	traversalEntries := []int{3, 6}
+	assert.Equal(t, traversalEntries, binaryTree.TraverseInOrder())
+}
+
+func TestIfWeCanRemoveTheRootWhichDoesNotHaveALeftSubtree(t *testing.T) {
+	binaryTree := BinarySearchTree{}
+	binaryTree.Add(&BSTNode{data: 11})
+	binaryTree.Add(&BSTNode{data: 15})
+	binaryTree.Add(&BSTNode{data: 18})
+	binaryTree.Remove(11)
+	traversalEntries := []int{15, 18}
+	assert.Equal(t, traversalEntries, binaryTree.TraverseInOrder())
+}
