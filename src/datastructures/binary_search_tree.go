@@ -179,24 +179,20 @@ func (b *BinarySearchTree) removeElement(element int, currentNode *BSTNode, pare
 
 func (b *BinarySearchTree) removeNodeFromTree(currentNode *BSTNode, parentNode *BSTNode) {
 	if currentNode.left == nil {
-		if parentNode == nil {
-			b.root = currentNode.left
-			return
-		}
-		if parentNode.left == currentNode {
-			parentNode.left = currentNode.right
-		} else {
-			parentNode.right = currentNode.right
-		}
+		b.removeNodeFromParent(currentNode, parentNode, currentNode.right)
 	} else {
-		if parentNode == nil {
-			b.root = currentNode.left
-			return
-		}
-		if parentNode.left == currentNode {
-			parentNode.left = currentNode.left
-		} else {
-			parentNode.right = currentNode.left
-		}
+		b.removeNodeFromParent(currentNode, parentNode, currentNode.left)
+	}
+}
+
+func (b *BinarySearchTree) removeNodeFromParent(currentNode *BSTNode, parentNode *BSTNode, replacementNode *BSTNode) {
+	if parentNode == nil {
+		b.root = replacementNode
+		return
+	}
+	if parentNode.left == currentNode {
+		parentNode.left = replacementNode
+	} else {
+		parentNode.right = replacementNode
 	}
 }

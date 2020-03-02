@@ -406,3 +406,8 @@ func TestIfWeCanRemoveTheRootWhichDoesNotHaveALeftSubtree(t *testing.T) {
 	traversalEntries := []int{15, 18}
 	assert.Equal(t, traversalEntries, binaryTree.TraverseInOrder())
 }
+
+func TestRemovalOfAnElementThatIsNotPresentInTheTree(t *testing.T) {
+	binaryTree := CreateBigBinaryTree()
+	assert.False(t, binaryTree.Remove(100))
+}
