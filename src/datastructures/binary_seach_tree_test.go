@@ -411,3 +411,30 @@ func TestRemovalOfAnElementThatIsNotPresentInTheTree(t *testing.T) {
 	binaryTree := CreateBigBinaryTree()
 	assert.False(t, binaryTree.Remove(100))
 }
+
+func TestRemovalOfAnElementOnTheRightThatHasLeftAndRightSubtree(t *testing.T) {
+	binaryTree := CreateBigBinaryTree()
+	binaryTree.Remove(15)
+	inorderTraversalEntries := []int{1, 3, 5, 6, 8, 11, 12, 13, 14, 17, 19}
+	preorderTraversalEntries := []int{11, 6, 3, 1, 5, 8, 14, 13, 12, 17, 19}
+	assert.Equal(t, inorderTraversalEntries, binaryTree.TraverseInOrder())
+	assert.Equal(t, preorderTraversalEntries, binaryTree.TraversePreOrder())
+}
+
+func TestRemovalOfAnElementOnTheLeftThatHasLeftAndRightSubtree(t *testing.T) {
+	binaryTree := CreateBigBinaryTree()
+	binaryTree.Remove(6)
+	inorderTraversalEntries := []int{1, 3, 5, 8, 11, 12, 13, 14, 15, 17, 19}
+	preorderTraversalEntries := []int{11, 5, 3, 1, 8, 15, 13, 12, 14, 17, 19}
+	assert.Equal(t, inorderTraversalEntries, binaryTree.TraverseInOrder())
+	assert.Equal(t, preorderTraversalEntries, binaryTree.TraversePreOrder())
+}
+
+func TestRemovalOfRootElementWithBothLeftAndRightSubtree(t *testing.T) {
+	binaryTree := CreateBigBinaryTree()
+	binaryTree.Remove(11)
+	inorderTraversalEntries := []int{1, 3, 5, 6, 8, 12, 13, 14, 15, 17, 19}
+	preorderTraversalEntries := []int{8, 6, 3, 1, 5, 15, 13, 12, 14, 17, 19}
+	assert.Equal(t, inorderTraversalEntries, binaryTree.TraverseInOrder())
+	assert.Equal(t, preorderTraversalEntries, binaryTree.TraversePreOrder())
+}

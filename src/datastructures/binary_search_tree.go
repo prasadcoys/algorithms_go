@@ -178,11 +178,37 @@ func (b *BinarySearchTree) removeElement(element int, currentNode *BSTNode, pare
 }
 
 func (b *BinarySearchTree) removeNodeFromTree(currentNode *BSTNode, parentNode *BSTNode) {
+
 	if currentNode.left == nil {
 		b.removeNodeFromParent(currentNode, parentNode, currentNode.right)
-	} else {
+	} else if currentNode.right == nil {
 		b.removeNodeFromParent(currentNode, parentNode, currentNode.left)
+	} else {
+		// find the largest element of the left sub tree and then swap
+		largestNode, parentOfLargestNode := b.FindLargestNodeInTheLeftSubtree(currentNode.left, currentNode)
+		parentOfLargestNode.right = nil
+		if parentNode == nil {
+			b.root = largestNode
+			largestNode.left = currentNode.left
+			largestNode.right = currentNode.right
+			return
+		}
+		if parentNode.data > currentNode.data {
+			parentNode.left = largestNode
+		} else {
+			parentNode.right = largestNode
+		}
+		largestNode.left = currentNode.left
+		largestNode.right = currentNode.right
+
 	}
+}
+
+func (b *BinarySearchTree) FindLargestNodeInTheLeftSubtree(currentNode *BSTNode, parentNode *BSTNode) (*BSTNode, *BSTNode) {
+	if currentNode.right == nil {
+		return currentNode, parentNode
+	}
+	return b.FindLargestNodeInTheLeftSubtree(currentNode.right, currentNode)
 }
 
 func (b *BinarySearchTree) removeNodeFromParent(currentNode *BSTNode, parentNode *BSTNode, replacementNode *BSTNode) {
