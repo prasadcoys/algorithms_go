@@ -222,3 +222,41 @@ func (b *BinarySearchTree) removeNodeFromParent(currentNode *BSTNode, parentNode
 		parentNode.right = replacementNode
 	}
 }
+
+func (b *BinarySearchTree) FetchAllElementsLessThan(higherLimit int) []int {
+	matchingElements := []int{}
+
+	inorderTraversal := b.TraverseInOrder()
+	for _, element := range inorderTraversal {
+		if element >= higherLimit {
+			continue
+		}
+		matchingElements = append(matchingElements, element)
+	}
+	return matchingElements
+}
+
+func (b *BinarySearchTree) FetchAllElementsGreaterThan(lowerLimit int) []int {
+	matchingElements := []int{}
+
+	inorderTraversal := b.TraverseInOrder()
+	for _, element := range inorderTraversal {
+		if element <= lowerLimit {
+			continue
+		}
+		matchingElements = append(matchingElements, element)
+	}
+	return matchingElements
+}
+
+func (b *BinarySearchTree) FindElementsInRange(lowerLimit int, upperLimit int) []int {
+	matchingElements := []int{}
+	inorderTraversal := b.TraverseInOrder()
+	for _, element := range inorderTraversal {
+		if element <= lowerLimit || element >= upperLimit {
+			continue
+		}
+		matchingElements = append(matchingElements, element)
+	}
+	return matchingElements
+}
