@@ -271,3 +271,11 @@ func (b *BinarySearchTree) findElementsInRange(currentRoot *BSTNode, matchingEle
 		b.findElementsInRange(currentRoot.right, matchingElements, lowerLimit, higherLimit)
 	}
 }
+
+func ConvertLevelOrderTraversalToBinarySearchTree(levelOrder []int) BinarySearchTree {
+	binaryTree := BinarySearchTree{}
+	for _, element := range levelOrder {
+		binaryTree.Add(&BSTNode{data: element})
+	}
+	return binaryTree
+}

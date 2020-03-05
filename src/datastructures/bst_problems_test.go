@@ -25,3 +25,17 @@ func TestIfWeCanPrintTheElementsInRange(t *testing.T) {
 	expectedMatches := []int{11, 12, 13, 14, 15}
 	assert.ElementsMatch(t, expectedMatches, binaryTree.FindElementsInRange(lowerLimit, upperLimit))
 }
+
+func TestIfWeCanConvertLevelOrderTraversalToBST(t *testing.T) {
+	levelOrder := []int{7, 4, 12}
+	binaryTree := ConvertLevelOrderTraversalToBinarySearchTree(levelOrder)
+	preorderEntries := []int{4, 12, 7}
+	assert.Equal(t, preorderEntries, binaryTree.TraversePostOrder())
+}
+
+func TestIfWeCanConvertABiggerLevelOrderTraversalToBST(t *testing.T) {
+	levelOrder := []int{7, 4, 12, 3, 6, 8, 1, 5, 10}
+	binaryTree := ConvertLevelOrderTraversalToBinarySearchTree(levelOrder)
+	preorderEntries := []int{1, 3, 5, 6, 4, 10, 8, 12, 7}
+	assert.Equal(t, preorderEntries, binaryTree.TraversePostOrder())
+}
