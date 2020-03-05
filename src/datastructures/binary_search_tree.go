@@ -249,14 +249,25 @@ func (b *BinarySearchTree) FetchAllElementsGreaterThan(lowerLimit int) []int {
 	return matchingElements
 }
 
-func (b *BinarySearchTree) FindElementsInRange(lowerLimit int, upperLimit int) []int {
+func (b *BinarySearchTree) FindElementsInRange(lowerLimit int, higherLimit int) []int {
 	matchingElements := []int{}
-	inorderTraversal := b.TraverseInOrder()
-	for _, element := range inorderTraversal {
-		if element <= lowerLimit || element >= upperLimit {
-			continue
-		}
-		matchingElements = append(matchingElements, element)
+	if b.root != nil {
+		b.findElementsInRange(b.root, &matchingElements, lowerLimit, higherLimit)
 	}
 	return matchingElements
+}
+
+func (b *BinarySearchTree) findElementsInRange(currentRoot *BSTNode, matchingElements *[]int, lowerLimit int, higherLimit int) {
+	if currentRoot == nil {
+		return
+	}
+	if currentRoot.data > lowerLimit && currentRoot.data < higherLimit {
+		*matchingElements = append(*matchingElements, currentRoot.data)
+		b.findElementsInRange(currentRoot.left, matchingElements, lowerLimit, higherLimit)
+		b.findElementsInRange(currentRoot.right, matchingElements, lowerLimit, higherLimit)
+	} else if currentRoot.data > higherLimit {
+		b.findElementsInRange(currentRoot.left, matchingElements, lowerLimit, higherLimit)
+	} else if currentRoot.data < lowerLimit {
+		b.findElementsInRange(currentRoot.right, matchingElements, lowerLimit, higherLimit)
+	}
 }
