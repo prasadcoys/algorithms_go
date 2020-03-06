@@ -39,3 +39,15 @@ func TestIfWeCanConvertABiggerLevelOrderTraversalToBST(t *testing.T) {
 	preorderEntries := []int{1, 3, 5, 6, 4, 10, 8, 12, 7}
 	assert.Equal(t, preorderEntries, binaryTree.TraversePostOrder())
 }
+
+func TestIFWeCanCalculateTheSumOfAllLeafNodesInABST(t *testing.T) {
+	binaryTree := CreateBigBinaryTree()
+	assert.Equal(t, 59, binaryTree.GetSumOfAllLeafNodes())
+
+}
+
+func TestIFWeCanCalculateTheSumOfAllLeafNodesInABSTIfRootIsZero(t *testing.T) {
+	binaryTree := BinarySearchTree{}
+	assert.Equal(t, 0, binaryTree.GetSumOfAllLeafNodes())
+
+}

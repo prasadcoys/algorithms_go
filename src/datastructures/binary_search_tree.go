@@ -279,3 +279,27 @@ func ConvertLevelOrderTraversalToBinarySearchTree(levelOrder []int) BinarySearch
 	}
 	return binaryTree
 }
+
+func (b *BinarySearchTree) GetSumOfAllLeafNodes() int {
+	var sum int
+
+	if b.root == nil {
+		return sum
+	}
+	b.calculateSum(b.root, &sum)
+
+	return sum
+}
+
+func (b *BinarySearchTree) calculateSum(currentRoot *BSTNode, sum *int) {
+	if currentRoot == nil {
+		return
+	}
+	if currentRoot.left == nil && currentRoot.right == nil {
+		*sum = *sum + currentRoot.data
+		return
+	}
+	b.calculateSum(currentRoot.left, sum)
+	b.calculateSum(currentRoot.right, sum)
+
+}
