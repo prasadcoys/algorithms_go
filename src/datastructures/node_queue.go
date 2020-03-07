@@ -13,3 +13,14 @@ func (n *NodeQueue) Dequeue() *BSTNode {
 	n.dataqueue = n.dataqueue[1:]
 	return headNode
 }
+
+func (n *NodeQueue) Push(node *BSTNode) {
+	n.Enqueue(node)
+}
+
+func (n *NodeQueue) Pop() *BSTNode {
+	length := len(n.dataqueue)
+	tailNode := n.dataqueue[length-1]
+	n.dataqueue = n.dataqueue[:length-1]
+	return tailNode
+}

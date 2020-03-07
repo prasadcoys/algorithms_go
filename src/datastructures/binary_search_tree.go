@@ -1,9 +1,17 @@
 package datastructures
 
+import (
+	"strconv"
+)
+
 type BSTNode struct {
 	data  int
 	left  *BSTNode
 	right *BSTNode
+}
+
+func (b *BSTNode) String() string {
+	return strconv.Itoa(b.data)
 }
 
 type BinarySearchTree struct {
@@ -301,5 +309,49 @@ func (b *BinarySearchTree) calculateSum(currentRoot *BSTNode, sum *int) {
 	}
 	b.calculateSum(currentRoot.left, sum)
 	b.calculateSum(currentRoot.right, sum)
+
+}
+
+func (b *BinarySearchTree) BalanaceBinaryTree() {
+
+	b.balanceSubTree(nil, b.root)
+}
+
+func (b *BinarySearchTree) balanceSubTree(parentNode *BSTNode, subtreeRoot *BSTNode) {
+	numberOfNodesToSkip := b.Height() / 2
+	currentNode := subtreeRoot
+	nodesSkippedInStack := NodeQueue{}
+	for nodesSkipped := 0; nodesSkipped < numberOfNodesToSkip; {
+		nodesSkippedInStack.Push(currentNode)
+		if currentNode.right != nil {
+			currentNode = currentNode.right
+		} else {
+			currentNode = currentNode.left
+		}
+		nodesSkipped = nodesSkipped + 1
+
+	}
+	//check if the subtree root is the root of the overall tree
+	if parentNode == nil {
+		b.root = currentNode
+
+	}
+	currentRoot := b.root
+	for {
+		if len(nodesSkippedInStack.dataqueue) == 0 {
+			return
+		}
+		nodeFromStack := nodesSkippedInStack.Pop()
+		nodeFromStack.left = nil
+		nodeFromStack.right = nil
+		if nodeFromStack.data < currentRoot.data {
+			currentRoot.left = nodeFromStack
+			currentRoot = currentRoot.left
+		} else {
+			currentRoot.right = nodeFromStack
+			currentRoot = currentRoot.right
+		}
+
+	}
 
 }

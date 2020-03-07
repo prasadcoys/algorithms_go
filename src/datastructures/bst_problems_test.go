@@ -51,3 +51,25 @@ func TestIFWeCanCalculateTheSumOfAllLeafNodesInABSTIfRootIsZero(t *testing.T) {
 	assert.Equal(t, 0, binaryTree.GetSumOfAllLeafNodes())
 
 }
+
+func TestIfWeCanBalanceABInarySearchTreeWithThreeElementsInAscendingOrder(t *testing.T) {
+	binaryTree := BinarySearchTree{}
+	binaryTree.Add(&BSTNode{data: 1})
+	binaryTree.Add(&BSTNode{data: 2})
+	binaryTree.Add(&BSTNode{data: 3})
+	assert.Equal(t, 3, binaryTree.Height())
+	binaryTree.BalanaceBinaryTree()
+	assert.Equal(t, 2, binaryTree.Height())
+
+}
+
+func TestIfWeCanBalanceABInarySearchTreeWithThreeElementsInDescendingOrder(t *testing.T) {
+	binaryTree := BinarySearchTree{}
+	binaryTree.Add(&BSTNode{data: 3})
+	binaryTree.Add(&BSTNode{data: 2})
+	binaryTree.Add(&BSTNode{data: 1})
+	assert.Equal(t, 3, binaryTree.Height())
+	binaryTree.BalanaceBinaryTree()
+	assert.Equal(t, 2, binaryTree.Height())
+
+}
