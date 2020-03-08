@@ -351,7 +351,24 @@ func (b *BinarySearchTree) balanceSubTree(parentNode *BSTNode, subtreeRoot *BSTN
 			currentRoot.right = nodeFromStack
 			currentRoot = currentRoot.right
 		}
+	}
+}
 
+func (b *BinarySearchTree) GetSmallestElement() int {
+	if b.root == nil {
+		return -1
+	}
+	if b.root.left == nil {
+		return b.root.data
+	} else {
+		return getSmallestElementOfSubTree(b.root.left)
 	}
 
+}
+
+func getSmallestElementOfSubTree(subtreeRoot *BSTNode) int {
+	if subtreeRoot.left == nil {
+		return subtreeRoot.data
+	}
+	return getSmallestElementOfSubTree(subtreeRoot.left)
 }
