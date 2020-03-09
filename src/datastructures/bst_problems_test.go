@@ -115,3 +115,19 @@ func TestIfWeGetTheLowestValueIfWeHaveToTraverseMultipleLevels(t *testing.T) {
 	binaryTree := CreateBigBinaryTree()
 	assert.Equal(t, 1, binaryTree.GetSmallestElement())
 }
+
+func TestIfWeCanGetTheLowestCommonAncestorWhereBothElementsAreInTheSameSide(t *testing.T) {
+	binaryTree := CreateBigBinaryTree()
+	assert.Equal(t, 6, binaryTree.CalculateLowestCommonAncestor(3, 8))
+}
+
+func TestIfWeCanGetTheLowestCommonAncestorWhenTheElementsAreInDifferentSides(t *testing.T) {
+	binaryTree := BinarySearchTree{}
+	binaryTree.Add(&BSTNode{data: 5})
+	binaryTree.Add(&BSTNode{data: 4})
+	binaryTree.Add(&BSTNode{data: 6})
+	binaryTree.Add(&BSTNode{data: 3})
+	binaryTree.Add(&BSTNode{data: 7})
+	binaryTree.Add(&BSTNode{data: 8})
+	assert.Equal(t, 7, binaryTree.CalculateLowestCommonAncestor(7, 8))
+}

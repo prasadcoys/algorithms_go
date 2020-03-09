@@ -24,3 +24,7 @@ func (n *NodeQueue) Pop() *BSTNode {
 	n.dataqueue = n.dataqueue[:length-1]
 	return tailNode
 }
+
+func (n *NodeQueue) IsEmpty() bool {
+	return len(n.dataqueue) < 1
+}
