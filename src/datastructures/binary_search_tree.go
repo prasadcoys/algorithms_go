@@ -1,6 +1,7 @@
 package datastructures
 
 import (
+	"fmt"
 	"strconv"
 )
 
@@ -372,41 +373,20 @@ func getSmallestElementOfSubTree(subtreeRoot *BSTNode) int {
 	}
 	return getSmallestElementOfSubTree(subtreeRoot.left)
 }
-func (b *BinarySearchTree) CalculateLowestCommonAncestor(x int, y int) int {
-
-	leastCommonAncestor := b.root.data
-	xTrail := b.plotTrailOfElement(x)
-	yTrail := b.plotTrailOfElement(y)
-	// fmt.Println(xTrail.dataqueue)
-	// fmt.Println(yTrail.dataqueue)
+func (b *BinarySearchTree) CalculateLowestCommonAncestor(lowerLimit int, higherLimit int) int {
+	currentNode := b.root
 	for {
-		if xTrail.IsEmpty() || yTrail.IsEmpty() {
-			return leastCommonAncestor
+		fmt.Println(currentNode.data)
+		if currentNode.data >= lowerLimit && currentNode.data <= higherLimit {
+			return currentNode.data
+		} else if currentNode.data <= lowerLimit && currentNode.data <= higherLimit {
+			currentNode = currentNode.right
+			continue
+		} else if currentNode.data >= lowerLimit && currentNode.data > higherLimit {
+			currentNode = currentNode.left
+			continue
 		}
-		xTrailLatest := xTrail.Dequeue()
-		yTrailLatest := yTrail.Dequeue()
-		if xTrailLatest != yTrailLatest {
-			return leastCommonAncestor
-		}
-		leastCommonAncestor = xTrailLatest.data
 	}
 	return -1
-}
 
-func (b *BinarySearchTree) plotTrailOfElement(element int) NodeQueue {
-	trailOfElement := NodeQueue{}
-	b.plotTrailOfElementInSubtree(element, b.root, &trailOfElement)
-	return trailOfElement
-}
-
-func (b *BinarySearchTree) plotTrailOfElementInSubtree(element int, subtreeRoot *BSTNode, trail *NodeQueue) {
-	trail.Enqueue(subtreeRoot)
-	if subtreeRoot.data == element {
-		return
-	}
-	if element < subtreeRoot.data {
-		b.plotTrailOfElementInSubtree(element, subtreeRoot.left, trail)
-	} else {
-		b.plotTrailOfElementInSubtree(element, subtreeRoot.right, trail)
-	}
 }
