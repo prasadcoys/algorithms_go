@@ -131,3 +131,45 @@ func TestIfWeCanGetTheLowestCommonAncestorWhenTheElementsAreInDifferentSides(t *
 	binaryTree.Add(&BSTNode{data: 8})
 	assert.Equal(t, 7, binaryTree.CalculateLowestCommonAncestor(7, 8))
 }
+
+func TestIfWeCanDeleteNodesGreaterThanACertainNumberIfNumberIsOnRightTreeCompletely(t *testing.T) {
+	binaryTree := BinarySearchTree{}
+	binaryTree.Add(&BSTNode{data: 20})
+	binaryTree.Add(&BSTNode{data: 8})
+	binaryTree.Add(&BSTNode{data: 22})
+	binaryTree.Add(&BSTNode{data: 4})
+	binaryTree.Add(&BSTNode{data: 12})
+	binaryTree.Add(&BSTNode{data: 10})
+	binaryTree.Add(&BSTNode{data: 14})
+	binaryTree.DeleteNodesGreaterThan(20)
+	inorderTraversals := []int{4, 8, 10, 12, 14, 20}
+	assert.Equal(t, inorderTraversals, binaryTree.TraverseInOrder())
+}
+
+func TestIfWeCanDeleteNodesGreaterThanACertainNumberIfNumberIsOnLeftTree(t *testing.T) {
+	binaryTree := BinarySearchTree{}
+	binaryTree.Add(&BSTNode{data: 20})
+	binaryTree.Add(&BSTNode{data: 8})
+	binaryTree.Add(&BSTNode{data: 22})
+	binaryTree.Add(&BSTNode{data: 4})
+	binaryTree.Add(&BSTNode{data: 12})
+	binaryTree.Add(&BSTNode{data: 10})
+	binaryTree.Add(&BSTNode{data: 14})
+	binaryTree.DeleteNodesGreaterThan(8)
+	inorderTraversals := []int{4, 8}
+	assert.Equal(t, inorderTraversals, binaryTree.TraverseInOrder())
+}
+
+func TestIfWeCanDeleteNodesGreaterThanACertainNumberIfNumberIsNotPresentInTheTree(t *testing.T) {
+	binaryTree := BinarySearchTree{}
+	binaryTree.Add(&BSTNode{data: 20})
+	binaryTree.Add(&BSTNode{data: 8})
+	binaryTree.Add(&BSTNode{data: 22})
+	binaryTree.Add(&BSTNode{data: 4})
+	binaryTree.Add(&BSTNode{data: 12})
+	binaryTree.Add(&BSTNode{data: 10})
+	binaryTree.Add(&BSTNode{data: 14})
+	binaryTree.DeleteNodesGreaterThan(9)
+	inorderTraversals := []int{4, 8}
+	assert.Equal(t, inorderTraversals, binaryTree.TraverseInOrder())
+}

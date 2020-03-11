@@ -388,5 +388,30 @@ func (b *BinarySearchTree) CalculateLowestCommonAncestor(lowerLimit int, higherL
 		}
 	}
 	return -1
+}
+func (b *BinarySearchTree) DeleteNodesGreaterThan(element int) {
+	b.deleteElementsGreaterThan(element, nil, b.root)
+}
+
+func (b *BinarySearchTree) deleteElementsGreaterThan(element int, prevNode *BSTNode, currentNode *BSTNode) {
+	if currentNode == nil {
+		return
+	}
+	if currentNode.data <= element {
+		b.deleteElementsGreaterThan(element, currentNode, currentNode.right)
+	} else {
+		if prevNode == nil {
+			b.root = currentNode.left
+			b.deleteElementsGreaterThan(element, prevNode, currentNode.left)
+		} else {
+			if prevNode.data < currentNode.data {
+				prevNode.right = currentNode.left
+				b.deleteElementsGreaterThan(element, prevNode, currentNode.left)
+			} else {
+				prevNode.left = currentNode.left
+				b.deleteElementsGreaterThan(element, prevNode, currentNode.left)
+			}
+		}
+	}
 
 }
