@@ -415,3 +415,36 @@ func (b *BinarySearchTree) deleteElementsGreaterThan(element int, prevNode *BSTN
 	}
 
 }
+
+func (b *BinarySearchTree) AddAllGreaterValuesToEveryNode() {
+	inorderTraversal := b.traverseInOrderAndAddNodeToStack()
+	currentSum := 0
+	for {
+		{
+			node := inorderTraversal.Pop()
+			currentSum = currentSum + node.data
+			node.data = currentSum
+		}
+		if len(inorderTraversal.dataqueue) <= 0 {
+			return
+		}
+	}
+
+}
+
+//TODO: IF WE ARE NOT TO USE A STACK, ALL WE NEED TO DO IS DO A REVERSE IN ORDER TRAVERSAL AND WE WOULD BE ABLE TO DO THAT.
+func (b *BinarySearchTree) traverseInOrderAndAddNodeToStack() NodeQueue {
+	elements := NodeQueue{}
+	b.inOrderTraverseFromNodeAndUpdateStack(b.root, &elements)
+	return elements
+}
+
+func (b *BinarySearchTree) inOrderTraverseFromNodeAndUpdateStack(currentRoot *BSTNode, elementsTraversedSoFar *NodeQueue) {
+	if currentRoot == nil {
+	} else {
+		b.inOrderTraverseFromNodeAndUpdateStack(currentRoot.left, elementsTraversedSoFar)
+		// *elementsTraversedSoFar = append(*elementsTraversedSoFar, currentRoot.data)
+		elementsTraversedSoFar.Push(currentRoot)
+		b.inOrderTraverseFromNodeAndUpdateStack(currentRoot.right, elementsTraversedSoFar)
+	}
+}

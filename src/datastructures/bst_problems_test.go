@@ -173,3 +173,29 @@ func TestIfWeCanDeleteNodesGreaterThanACertainNumberIfNumberIsNotPresentInTheTre
 	inorderTraversals := []int{4, 8}
 	assert.Equal(t, inorderTraversals, binaryTree.TraverseInOrder())
 }
+
+func TestIfWeCanAddAllGreaterValuesToEveryNodeInBST(t *testing.T) {
+	binaryTree := BinarySearchTree{}
+	binaryTree.Add(&BSTNode{data: 2})
+	binaryTree.Add(&BSTNode{data: 1})
+	binaryTree.Add(&BSTNode{data: 3})
+	binaryTree.AddAllGreaterValuesToEveryNode()
+	inorderTraversals := []int{6, 5, 3}
+	assert.Equal(t, inorderTraversals, binaryTree.TraverseInOrder())
+}
+
+func TestIfWeCanAddAllGreaterValuesToEveryNodeInABiggerBST(t *testing.T) {
+	binaryTree := BinarySearchTree{}
+	binaryTree.Add(&BSTNode{data: 50})
+	binaryTree.Add(&BSTNode{data: 30})
+	binaryTree.Add(&BSTNode{data: 70})
+	binaryTree.Add(&BSTNode{data: 20})
+	binaryTree.Add(&BSTNode{data: 40})
+	binaryTree.Add(&BSTNode{data: 60})
+	binaryTree.Add(&BSTNode{data: 80})
+	binaryTree.AddAllGreaterValuesToEveryNode()
+	inorderTraversals := []int{350, 330, 300, 260, 210, 150, 80}
+	assert.Equal(t, inorderTraversals, binaryTree.TraverseInOrder())
+	levelOrderTraversals := []int{260, 330, 150, 350, 300, 210, 80}
+	assert.Equal(t, levelOrderTraversals, binaryTree.TraverseLevelOrder())
+}
