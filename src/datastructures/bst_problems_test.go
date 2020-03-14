@@ -210,3 +210,22 @@ func TestIfBSTSucceedsForTreeSatisfyingTheBSTProperty(t *testing.T) {
 	binaryTree := CreateBigBinaryTree()
 	assert.True(t, binaryTree.IsBST())
 }
+
+func TestIfBSTHasDeadEnd(t *testing.T) {
+	binaryTree := BinarySearchTree{}
+	binaryTree.Add(&BSTNode{data: 8})
+	binaryTree.Add(&BSTNode{data: 7})
+	binaryTree.Add(&BSTNode{data: 10})
+	binaryTree.Add(&BSTNode{data: 2})
+	binaryTree.Add(&BSTNode{data: 9})
+	binaryTree.Add(&BSTNode{data: 13})
+	assert.True(t, binaryTree.HasDeadEnd())
+}
+
+func TestIfBSTHasNoDeadEnd(t *testing.T) {
+	binaryTree := BinarySearchTree{}
+	binaryTree.Add(&BSTNode{data: 8})
+	binaryTree.Add(&BSTNode{data: 7})
+	binaryTree.Add(&BSTNode{data: 9})
+	assert.False(t, binaryTree.HasDeadEnd())
+}

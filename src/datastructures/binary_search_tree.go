@@ -1,7 +1,6 @@
 package datastructures
 
 import (
-	"fmt"
 	"strconv"
 )
 
@@ -376,7 +375,6 @@ func getSmallestElementOfSubTree(subtreeRoot *BSTNode) int {
 func (b *BinarySearchTree) CalculateLowestCommonAncestor(lowerLimit int, higherLimit int) int {
 	currentNode := b.root
 	for {
-		fmt.Println(currentNode.data)
 		if currentNode.data >= lowerLimit && currentNode.data <= higherLimit {
 			return currentNode.data
 		} else if currentNode.data <= lowerLimit && currentNode.data <= higherLimit {
@@ -457,4 +455,27 @@ func (b *BinarySearchTree) IsBST() bool {
 		}
 	}
 	return true
+}
+
+func (b *BinarySearchTree) HasDeadEnd() bool {
+	inorderEntries := b.traverseInOrderAndAddNodeToStack()
+	for i := 0; i < len(inorderEntries.dataqueue); i++ {
+		currentNode := inorderEntries.dataqueue[i]
+		if currentNode.left != nil && currentNode.right != nil {
+			continue
+		}
+		if i == 0 {
+			if currentNode.data < 2 {
+				return true
+			}
+		} else if i == len(inorderEntries.dataqueue)-1 {
+			continue
+		} else {
+			if (currentNode.data-inorderEntries.dataqueue[i-1].data) < 2 && (inorderEntries.dataqueue[i+1].data-currentNode.data) < 2 {
+				return true
+			}
+		}
+
+	}
+	return false
 }
