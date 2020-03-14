@@ -199,3 +199,14 @@ func TestIfWeCanAddAllGreaterValuesToEveryNodeInABiggerBST(t *testing.T) {
 	levelOrderTraversals := []int{260, 330, 150, 350, 300, 210, 80}
 	assert.Equal(t, levelOrderTraversals, binaryTree.TraverseLevelOrder())
 }
+
+func TestIfBSTFailsForTreeNotSatisfyingTheBSTProperty(t *testing.T) {
+	binaryTree := CreateBigBinaryTree()
+	binaryTree.root.right.left.data = 10
+	assert.False(t, binaryTree.IsBST())
+}
+
+func TestIfBSTSucceedsForTreeSatisfyingTheBSTProperty(t *testing.T) {
+	binaryTree := CreateBigBinaryTree()
+	assert.True(t, binaryTree.IsBST())
+}

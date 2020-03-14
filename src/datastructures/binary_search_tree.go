@@ -448,3 +448,13 @@ func (b *BinarySearchTree) inOrderTraverseFromNodeAndUpdateStack(currentRoot *BS
 		b.inOrderTraverseFromNodeAndUpdateStack(currentRoot.right, elementsTraversedSoFar)
 	}
 }
+
+func (b *BinarySearchTree) IsBST() bool {
+	inorderTraversal := b.TraverseInOrder()
+	for index, element := range inorderTraversal {
+		if index > 1 && element < inorderTraversal[index-1] {
+			return false
+		}
+	}
+	return true
+}
