@@ -229,3 +229,23 @@ func TestIfBSTHasNoDeadEnd(t *testing.T) {
 	binaryTree.Add(&BSTNode{data: 9})
 	assert.False(t, binaryTree.HasDeadEnd())
 }
+
+func TestIfPreorderTraversalIsABSTForValidBST(t *testing.T) {
+	preorderEntries := []int{40, 30, 35, 80, 100}
+	assert.True(t, IsPreorderAValidBST(preorderEntries))
+}
+
+func TestIfPreorderTraversalIsABSTForInvalidBST(t *testing.T) {
+	preorderEntries := []int{7, 9, 6, 1, 4, 2, 3, 40}
+	assert.False(t, IsPreorderAValidBST(preorderEntries))
+}
+
+func TestIfPreorderTraversalIsABSTForValidLargerBST(t *testing.T) {
+	preorderEntries := []int{40, 30, 32, 35, 80, 90, 100, 120}
+	assert.True(t, IsPreorderAValidBST(preorderEntries))
+}
+
+func TestIfPreorderTraversalIsABSTForInValidLargerBST(t *testing.T) {
+	preorderEntries := []int{40, 30, 32, 35, 80, 90, 100, 120, 20}
+	assert.False(t, IsPreorderAValidBST(preorderEntries))
+}

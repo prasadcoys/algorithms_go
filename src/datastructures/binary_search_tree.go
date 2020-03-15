@@ -479,3 +479,26 @@ func (b *BinarySearchTree) HasDeadEnd() bool {
 	}
 	return false
 }
+
+func IsPreorderAValidBST(preorder []int) bool {
+	isRootFinished, isRightStarted := false, false
+	binaryTree := BinarySearchTree{}
+	for _, value := range preorder {
+		if !isRootFinished {
+			binaryTree.root = &BSTNode{data: value}
+			isRootFinished = true
+			continue
+		}
+		if value < binaryTree.root.data && isRightStarted {
+			return false
+		} else {
+			if value > binaryTree.root.data {
+				isRightStarted = true
+			}
+			binaryTree.Add(&BSTNode{data: value})
+		}
+	}
+
+	return true
+
+}
