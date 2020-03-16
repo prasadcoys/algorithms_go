@@ -250,13 +250,12 @@ func TestIfPreorderTraversalIsABSTForInValidLargerBST(t *testing.T) {
 	assert.False(t, IsPreorderAValidBST(preorderEntries))
 }
 
-/* func TestIfInorderSuccessorForInvalidValueIsMinusOne(t *testing.T) {
+func TestIfInorderSuccessorForInvalidValueIsMinusOne(t *testing.T) {
 	binaryTree := CreateBigBinaryTree()
 	assert.Equal(t, -1, binaryTree.GetInorderSuccesor(100))
 }
 
 func TestIfInorderSuccessorForValidValueIsFetchedCorrectly(t *testing.T) {
 	binaryTree := CreateBigBinaryTree()
-	assert.Equal(t, 13, binaryTree.GetInorderSuccesor(1))
+	assert.Equal(t, 13, binaryTree.GetInorderSuccesor(12))
 }
-*/

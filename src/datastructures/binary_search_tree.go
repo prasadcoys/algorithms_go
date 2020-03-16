@@ -518,3 +518,13 @@ func IsPreorderAValidBST(preorder []int) bool {
 	return true
 
 }
+
+func (b *BinarySearchTree) GetInorderSuccesor(value int) int {
+	inorderEntries := b.TraverseInOrder()
+	for index, entry := range inorderEntries {
+		if entry == value && len(inorderEntries) > index+2 {
+			return inorderEntries[index+1]
+		}
+	}
+	return -1
+}
