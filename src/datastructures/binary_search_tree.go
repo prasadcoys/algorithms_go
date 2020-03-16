@@ -1,6 +1,7 @@
 package datastructures
 
 import (
+	"fmt"
 	"strconv"
 )
 
@@ -520,21 +521,38 @@ func IsPreorderAValidBST(preorder []int) bool {
 }
 
 func (b *BinarySearchTree) GetInorderSuccesor(value int) int {
-	return b.getInorderSuccessor(value, b.root, nil)
+	return b.getInorderSuccessor(value, b.root, nil, &NodeQueue{})
 }
 
-func (b *BinarySearchTree) getInorderSuccessor(value int, currentRoot *BSTNode, prevNode *BSTNode) int {
+func (b *BinarySearchTree) getInorderSuccessor(value int, currentRoot *BSTNode, prevNode *BSTNode, stack *NodeQueue) int {
 	if currentRoot == nil {
 		return -1
 	}
+	stack.Push(currentRoot)
 	if value < currentRoot.data {
-		return b.getInorderSuccessor(value, currentRoot.left, currentRoot)
+
+		return b.getInorderSuccessor(value, currentRoot.left, currentRoot, stack)
 	} else if value > currentRoot.data {
-		return b.getInorderSuccessor(value, currentRoot.right, currentRoot)
+		return b.getInorderSuccessor(value, currentRoot.right, currentRoot, stack)
 	} else {
-		if prevNode.data < value && currentRoot.right != nil {
-			return currentRoot.right.data
+		fmt.Println(prevNode.data, value, currentRoot.right)
+		if prevNode.data < value {
+			if currentRoot.right != nil {
+				return currentRoot.right.data
+			} else {
+				for {
+					node := stack.Pop()
+					if node == nil {
+						return -1
+					}
+					if node.data > value {
+						return node.data
+					}
+
+				}
+			}
 		}
+
 		return prevNode.data
 	}
 }
