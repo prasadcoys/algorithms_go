@@ -520,11 +520,21 @@ func IsPreorderAValidBST(preorder []int) bool {
 }
 
 func (b *BinarySearchTree) GetInorderSuccesor(value int) int {
-	inorderEntries := b.TraverseInOrder()
-	for index, entry := range inorderEntries {
-		if entry == value && len(inorderEntries) > index+2 {
-			return inorderEntries[index+1]
-		}
+	return b.getInorderSuccessor(value, b.root, nil)
+}
+
+func (b *BinarySearchTree) getInorderSuccessor(value int, currentRoot *BSTNode, prevNode *BSTNode) int {
+	if currentRoot == nil {
+		return -1
 	}
-	return -1
+	if value < currentRoot.data {
+		return b.getInorderSuccessor(value, currentRoot.left, currentRoot)
+	} else if value > currentRoot.data {
+		return b.getInorderSuccessor(value, currentRoot.right, currentRoot)
+	} else {
+		if prevNode.data < value && currentRoot.right != nil {
+			return currentRoot.right.data
+		}
+		return prevNode.data
+	}
 }
