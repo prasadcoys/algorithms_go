@@ -438,3 +438,9 @@ func TestRemovalOfRootElementWithBothLeftAndRightSubtree(t *testing.T) {
 	assert.Equal(t, inorderTraversalEntries, binaryTree.TraverseInOrder())
 	assert.Equal(t, preorderTraversalEntries, binaryTree.TraversePreOrder())
 }
+
+func TestIfReverseInOrderTraversalWorks(t *testing.T) {
+	binaryTree := CreateBigBinaryTree()
+	reverseOrder := []int{19, 17, 15, 14, 13, 12, 11, 8, 6, 5, 3, 1}
+	assert.Equal(t, reverseOrder, binaryTree.TraverseReverseInOrder())
+}

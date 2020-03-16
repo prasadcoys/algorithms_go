@@ -121,6 +121,22 @@ func (b *BinarySearchTree) InOrderTraverseFromNodeAndUpdateSlice(currentRoot *BS
 	}
 }
 
+func (b *BinarySearchTree) TraverseReverseInOrder() []int {
+	elements := []int{}
+	b.reverseInOrderTraverseFromNodeAndUpdateSlice(b.root, &elements)
+	return elements
+}
+
+func (b *BinarySearchTree) reverseInOrderTraverseFromNodeAndUpdateSlice(currentRoot *BSTNode, elementsTraversedSoFar *[]int) {
+
+	if currentRoot == nil {
+	} else {
+		b.reverseInOrderTraverseFromNodeAndUpdateSlice(currentRoot.right, elementsTraversedSoFar)
+		*elementsTraversedSoFar = append(*elementsTraversedSoFar, currentRoot.data)
+		b.reverseInOrderTraverseFromNodeAndUpdateSlice(currentRoot.left, elementsTraversedSoFar)
+	}
+}
+
 func (b *BinarySearchTree) TraversePostOrder() []int {
 	elements := []int{}
 	b.PostOrderTraverseFromNodeAndUpdateSlice(b.root, &elements)
