@@ -266,6 +266,18 @@ func TestInorderSuccessorForALargeTree(t *testing.T) {
 	assert.Equal(t, 927, binaryTree.GetInorderSuccesor(926))
 }
 
+func TestIfWeCanCorrectlyCalculatePairsViolatingTheBSTProperty(t *testing.T) {
+	binaryTree := BinarySearchTree{}
+	binaryTree.root = &BSTNode{data: 50}
+	binaryTree.root.left = &BSTNode{data: 30}
+	binaryTree.root.right = &BSTNode{data: 60}
+	binaryTree.root.left.left = &BSTNode{data: 20}
+	binaryTree.root.left.right = &BSTNode{data: 25}
+	binaryTree.root.right.left = &BSTNode{data: 10}
+	binaryTree.root.right.right = &BSTNode{data: 40}
+	assert.Equal(t, 7, binaryTree.FindNumberOfOffendingPairs())
+}
+
 func createTreeWithSlice(values []int) BinarySearchTree {
 	binaryTree := BinarySearchTree{}
 	for _, value := range values {

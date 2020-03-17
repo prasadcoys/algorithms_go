@@ -556,3 +556,16 @@ func (b *BinarySearchTree) getInorderSuccessor(value int, currentRoot *BSTNode, 
 		return prevNode.data
 	}
 }
+
+func (b *BinarySearchTree) FindNumberOfOffendingPairs() int {
+	numberOfOffendingPairs := 0
+	inorderEntries := b.TraverseInOrder()
+	for index, entry := range inorderEntries {
+		for i := index + 1; i < len(inorderEntries); i++ {
+			if entry > inorderEntries[i] {
+				numberOfOffendingPairs = numberOfOffendingPairs + 1
+			}
+		}
+	}
+	return numberOfOffendingPairs
+}
