@@ -558,8 +558,12 @@ func (b *BinarySearchTree) getInorderSuccessor(value int, currentRoot *BSTNode, 
 }
 
 func (b *BinarySearchTree) FindNumberOfOffendingPairs() int {
-	numberOfOffendingPairs := 0
 	inorderEntries := b.TraverseInOrder()
+	return findNumberOfOffendingPairs(inorderEntries)
+}
+
+func findNumberOfOffendingPairs(inorderEntries []int) int {
+	numberOfOffendingPairs := 0
 	for index, entry := range inorderEntries {
 		for i := index + 1; i < len(inorderEntries); i++ {
 			if entry > inorderEntries[i] {
@@ -568,4 +572,9 @@ func (b *BinarySearchTree) FindNumberOfOffendingPairs() int {
 		}
 	}
 	return numberOfOffendingPairs
+}
+
+func findNumberOfInversions(inorderEntries []int) int {
+
+	return 0
 }

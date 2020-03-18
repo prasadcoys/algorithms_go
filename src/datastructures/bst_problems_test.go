@@ -278,6 +278,11 @@ func TestIfWeCanCorrectlyCalculatePairsViolatingTheBSTProperty(t *testing.T) {
 	assert.Equal(t, 7, binaryTree.FindNumberOfOffendingPairs())
 }
 
+func TestIfNumberOfInversionsInMergeSortIsCalculatedCorrectly(t *testing.T) {
+	entries := []int{20, 30, 25, 50, 10, 60, 40}
+	assert.Equal(t, 7, findNumberOfInversions(entries))
+}
+
 func createTreeWithSlice(values []int) BinarySearchTree {
 	binaryTree := BinarySearchTree{}
 	for _, value := range values {
