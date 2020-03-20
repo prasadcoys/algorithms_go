@@ -7,6 +7,6 @@ import (
 )
 
 func TestIfMergeSortWorksCorrectlyForTwoElementsNotSorted(t *testing.T) {
-	entries := []int{2, 1}
-	assert.Equal(t, []int{1, 2}, MergeSort(entries))
+	entries := []int{4, 3, 2, 1}
+	assert.Equal(t, []int{1, 2, 3, 4}, MergeSort(entries))
 }
