@@ -1,26 +1,25 @@
-package algorithms
-
-import "fmt"
+package datastructures
 
 func MergeSort(entries []int) []int {
-	d := 0
-	doRecursiveMergeSort(&entries, 0, len(entries)-1, &d)
+
+	DoRecursiveMergeSort(&entries, 0, len(entries)-1, 0)
 	return entries
 }
 
-func doRecursiveMergeSort(entries *[]int, startIndex int, endIndex int, d *int) *int {
+// export
+func DoRecursiveMergeSort(entries *[]int, startIndex int, endIndex int, d int) int {
 	leftEndIndex := (startIndex + endIndex) / 2
 	rightStartIndex := leftEndIndex + 1
 	if startIndex < endIndex {
-		*d = *d + *doRecursiveMergeSort(entries, startIndex, leftEndIndex, d)
-		*d = *d + *doRecursiveMergeSort(entries, rightStartIndex, endIndex, d)
+		d = d + DoRecursiveMergeSort(entries, startIndex, leftEndIndex, 0)
+		d = d + DoRecursiveMergeSort(entries, rightStartIndex, endIndex, 0)
 
 	}
-	*d = *d + *mergeTwoHalves(entries, startIndex, endIndex, d)
+	d = d + mergeTwoHalves(entries, startIndex, endIndex, 0)
 	return d
 }
 
-func mergeTwoHalves(entries *[]int, startIndex int, endIndex int, d *int) *int {
+func mergeTwoHalves(entries *[]int, startIndex int, endIndex int, d int) int {
 	if startIndex == endIndex {
 		return d
 	}
@@ -35,9 +34,8 @@ func mergeTwoHalves(entries *[]int, startIndex int, endIndex int, d *int) *int {
 		}
 		if (*entries)[i] > (*entries)[j] {
 			tempArray = append(tempArray, (*entries)[j])
-			fmt.Println("item of interest", j-i, (*entries)[j])
 			j = j + 1
-			*d = *d + 1
+			d = d + leftEndIndex + 1 - i
 
 		} else {
 			tempArray = append(tempArray, (*entries)[i])

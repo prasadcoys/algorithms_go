@@ -575,6 +575,5 @@ func findNumberOfOffendingPairs(inorderEntries []int) int {
 }
 
 func findNumberOfInversions(inorderEntries []int) int {
-
-	return 0
+	return DoRecursiveMergeSort(&inorderEntries, 0, len(inorderEntries)-1, 0)
 }
