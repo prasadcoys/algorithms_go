@@ -3,62 +3,56 @@ package algorithms
 import "fmt"
 
 func MergeSort(entries []int) []int {
-	doRecursiveMergeSort(&entries, 0, len(entries)-1, 0)
+	d := 0
+	doRecursiveMergeSort(&entries, 0, len(entries)-1, &d)
 	return entries
 }
 
-func doRecursiveMergeSort(entries *[]int, startIndex int, endIndex int, d int) int {
+func doRecursiveMergeSort(entries *[]int, startIndex int, endIndex int, d *int) *int {
 	leftEndIndex := (startIndex + endIndex) / 2
 	rightStartIndex := leftEndIndex + 1
 	if startIndex < endIndex {
-		d += doRecursiveMergeSort(entries, startIndex, leftEndIndex, d)
-		d += doRecursiveMergeSort(entries, rightStartIndex, endIndex, d)
+		*d = *d + *doRecursiveMergeSort(entries, startIndex, leftEndIndex, d)
+		*d = *d + *doRecursiveMergeSort(entries, rightStartIndex, endIndex, d)
 
 	}
-	fmt.Println(startIndex, ":", endIndex)
-	mergeTwoHalves(entries, startIndex, endIndex)
+	*d = *d + *mergeTwoHalves(entries, startIndex, endIndex, d)
 	return d
 }
 
-func mergeTwoHalves(entries *[]int, startIndex int, endIndex int) {
+func mergeTwoHalves(entries *[]int, startIndex int, endIndex int, d *int) *int {
 	if startIndex == endIndex {
-		return
+		return d
 	}
 	tempArray := []int{}
 	leftEndIndex := (startIndex + endIndex) / 2
 	rightStartIndex := leftEndIndex + 1
+	i := startIndex
+	j := rightStartIndex
 	for {
-		i := startIndex
-		j := rightStartIndex
-		for {
-			if i > leftEndIndex || j > endIndex {
-				fmt.Println("About to break")
-				fmt.Println(tempArray)
-				return
-			}
-			if (*entries)[i] > (*entries)[j] {
-				fmt.Println("i greater")
-				tempArray = append(tempArray, (*entries)[j])
-				j++
-			} else {
-				fmt.Println("j greater")
-				tempArray = append(tempArray, (*entries)[i])
-				i++
-			}
+		if i > leftEndIndex || j > endIndex {
+			break
 		}
+		if (*entries)[i] > (*entries)[j] {
+			tempArray = append(tempArray, (*entries)[j])
+			fmt.Println("item of interest", j-i, (*entries)[j])
+			j = j + 1
+			*d = *d + 1
 
-		/* if i <= leftEndIndex {
-			for _, entry := range (*entries)[i:leftEndIndex] {
-				tempArray = append(tempArray, entry)
-			}
 		} else {
-
-			for _, entry := range (*entries)[j:endIndex] {
-				tempArray = append(tempArray, entry)
-			}
-		} */
-
-		// fmt.Println(tempArray)
-
+			tempArray = append(tempArray, (*entries)[i])
+			i = i + 1
+		}
 	}
+	if i <= leftEndIndex {
+		tempArray = append(tempArray, (*entries)[i:leftEndIndex+1]...)
+	} else {
+		tempArray = append(tempArray, (*entries)[j:endIndex+1]...)
+	}
+	i = startIndex
+	for _, entry := range tempArray {
+		(*entries)[i] = entry
+		i = i + 1
+	}
+	return d
 }
