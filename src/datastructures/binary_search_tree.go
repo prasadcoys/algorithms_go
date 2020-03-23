@@ -581,3 +581,7 @@ func findNumberOfInversions(inorderEntries []int) int {
 func DoesPairMakingGivenSumExistsInTree(binaryTree BinarySearchTree, sum int) bool {
 	return DoesPairMakingGivenSumExistsIn(binaryTree.TraverseInOrder(), sum)
 }
+
+func MergeBSTs(binaryTree_1 BinarySearchTree, binaryTree_2 BinarySearchTree) []int {
+	return MergeTwoSortedArrays(binaryTree_1.TraverseInOrder(), binaryTree_2.TraverseInOrder())
+}

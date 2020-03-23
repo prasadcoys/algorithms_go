@@ -292,6 +292,23 @@ func TestIfBinarySearchTreeDoesNotContainAPairWithGivenSum(t *testing.T) {
 	binaryTree := CreateBigBinaryTree()
 	assert.Equal(t, false, DoesPairMakingGivenSumExistsInTree(binaryTree, 35))
 }
+
+func TestIfBSTsCanBeMerged(t *testing.T) {
+	binaryTree_1 := BinarySearchTree{}
+	binaryTree_1.Add(&BSTNode{data: 5})
+	binaryTree_1.Add(&BSTNode{data: 3})
+	binaryTree_1.Add(&BSTNode{data: 6})
+	binaryTree_1.Add(&BSTNode{data: 2})
+	binaryTree_1.Add(&BSTNode{data: 4})
+	binaryTree_2 := BinarySearchTree{}
+	binaryTree_2.Add(&BSTNode{data: 2})
+	binaryTree_2.Add(&BSTNode{data: 1})
+	binaryTree_2.Add(&BSTNode{data: 3})
+	binaryTree_2.Add(&BSTNode{data: 7})
+	binaryTree_2.Add(&BSTNode{data: 6})
+	assert.Equal(t, []int{1, 2, 2, 3, 3, 4, 5, 6, 6, 7}, MergeBSTs(binaryTree_1, binaryTree_2))
+}
+
 func createTreeWithSlice(values []int) BinarySearchTree {
 	binaryTree := BinarySearchTree{}
 	for _, value := range values {

@@ -15,3 +15,10 @@ func TestIfGivenAnArrayOfSortedNumbersWeCanCheckIfPairWithGivenSumDoesNotExist(t
 	entries := []int{1, 3, 4, 5, 6}
 	assert.False(t, DoesPairMakingGivenSumExistsIn(entries, 12))
 }
+
+func TestIfMergeOfTwoSortedArraysWorksCorrectlyWithDuplicateElements(t *testing.T) {
+	entries_1 := []int{2, 3, 4, 5, 6}
+	entries_2 := []int{1, 2, 3, 6, 7}
+	expected_entries := []int{1, 2, 2, 3, 3, 4, 5, 6, 6, 7}
+	assert.Equal(t, expected_entries, MergeTwoSortedArrays(entries_1, entries_2))
+}
