@@ -577,3 +577,7 @@ func findNumberOfOffendingPairs(inorderEntries []int) int {
 func findNumberOfInversions(inorderEntries []int) int {
 	return DoRecursiveMergeSort(&inorderEntries, 0, len(inorderEntries)-1, 0)
 }
+
+func DoesPairMakingGivenSumExistsInTree(binaryTree BinarySearchTree, sum int) bool {
+	return DoesPairMakingGivenSumExistsIn(binaryTree.TraverseInOrder(), sum)
+}

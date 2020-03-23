@@ -283,6 +283,15 @@ func TestIfNumberOfInversionsInMergeSortIsCalculatedCorrectly(t *testing.T) {
 	assert.Equal(t, 7, findNumberOfInversions(entries))
 }
 
+func TestIfBinarySearchTreeCanContainAPairWithGivenSum(t *testing.T) {
+	binaryTree := CreateBigBinaryTree()
+	assert.Equal(t, true, DoesPairMakingGivenSumExistsInTree(binaryTree, 27))
+}
+
+func TestIfBinarySearchTreeDoesNotContainAPairWithGivenSum(t *testing.T) {
+	binaryTree := CreateBigBinaryTree()
+	assert.Equal(t, false, DoesPairMakingGivenSumExistsInTree(binaryTree, 35))
+}
 func createTreeWithSlice(values []int) BinarySearchTree {
 	binaryTree := BinarySearchTree{}
 	for _, value := range values {
