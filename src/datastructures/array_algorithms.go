@@ -40,3 +40,17 @@ func MergeTwoSortedArrays(array_1 []int, array_2 []int) []int {
 
 	return mergedArray
 }
+
+func PairWithGivenSumInUnsortedArray(entries []int, target int) []int {
+	pair := []int{-1, -1}
+	differentials := make(map[int]int)
+	for index, entry := range entries {
+		if value, isEntryPresent := differentials[entry]; isEntryPresent {
+			return []int{value, index}
+		}
+		differenceWithTarget := target - entry
+		differentials[differenceWithTarget] = index
+	}
+
+	return pair
+}

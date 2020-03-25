@@ -22,3 +22,8 @@ func TestIfMergeOfTwoSortedArraysWorksCorrectlyWithDuplicateElements(t *testing.
 	expected_entries := []int{1, 2, 2, 3, 3, 4, 5, 6, 6, 7}
 	assert.Equal(t, expected_entries, MergeTwoSortedArrays(entries_1, entries_2))
 }
+
+func TestIfGivenAnUnsortedArrayWeCanFindPairExistsWithGivenSum(t *testing.T) {
+	entries := []int{8, 7, 1, 3}
+	assert.EqualValues(t, []int{1, 2}, PairWithGivenSumInUnsortedArray(entries, 8))
+}
