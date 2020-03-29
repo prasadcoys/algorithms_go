@@ -54,3 +54,28 @@ func PairWithGivenSumInUnsortedArray(entries []int, target int) []int {
 
 	return pair
 }
+
+func RotateArray(nums []int, numberOfTimes int) []int {
+	nums = append(nums, nums[0:numberOfTimes]...)
+	nums = nums[numberOfTimes:]
+	return nums
+}
+
+func MinimumRequiredForBalancing(numbers []int) int {
+	differential := 0
+	start := 0
+	end := len(numbers) - 1
+	for {
+		if start > end {
+			break
+		}
+		differential = differential + numbers[end] - numbers[start]
+		start = start + 1
+		end = end - 1
+
+	}
+	if differential < 0 {
+		return differential * -1
+	}
+	return differential
+}

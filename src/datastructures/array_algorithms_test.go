@@ -11,6 +11,15 @@ func TestIfGivenAnArrayOfSortedNumbersWeCanCheckIfPairWithGivenSumExists(t *test
 	assert.True(t, DoesPairMakingGivenSumExistsIn(entries, 5))
 }
 
+func TestIfWeCanBalanceAnEvenArrayIfRightSideIsBigger(t *testing.T) {
+	entries := []int{1, 2, 1, 2, 1, 3}
+	assert.Equal(t, 2, MinimumRequiredForBalancing(entries))
+}
+
+func TestIfWeCanBalanceAnEvenArrayIfLeftSideIsBigger(t *testing.T) {
+	entries := []int{20, 10}
+	assert.Equal(t, 10, MinimumRequiredForBalancing(entries))
+}
 func TestIfGivenAnArrayOfSortedNumbersWeCanCheckIfPairWithGivenSumDoesNotExist(t *testing.T) {
 	entries := []int{1, 3, 4, 5, 6}
 	assert.False(t, DoesPairMakingGivenSumExistsIn(entries, 12))
@@ -26,4 +35,16 @@ func TestIfMergeOfTwoSortedArraysWorksCorrectlyWithDuplicateElements(t *testing.
 func TestIfGivenAnUnsortedArrayWeCanFindPairExistsWithGivenSum(t *testing.T) {
 	entries := []int{8, 7, 1, 3}
 	assert.EqualValues(t, []int{1, 2}, PairWithGivenSumInUnsortedArray(entries, 8))
+}
+
+func TestIfArrayCanBeRotated(t *testing.T) {
+	nums := []int{1, 2, 3, 4, 5}
+	expected_after_rotation := []int{3, 4, 5, 1, 2}
+	assert.Equal(t, expected_after_rotation, RotateArray(nums, 2))
+}
+
+func TestIfArrayCanBeRotatedForABiggerArray(t *testing.T) {
+	nums := []int{2, 4, 6, 8, 10, 12, 14, 16, 18}
+	expected_after_rotation := []int{8, 10, 12, 14, 16, 18, 2, 4, 6}
+	assert.Equal(t, expected_after_rotation, RotateArray(nums, 3))
 }
