@@ -48,3 +48,10 @@ func TestIfArrayCanBeRotatedForABiggerArray(t *testing.T) {
 	expected_after_rotation := []int{8, 10, 12, 14, 16, 18, 2, 4, 6}
 	assert.Equal(t, expected_after_rotation, RotateArray(nums, 3))
 }
+
+func TestIfSumOfAllPairsOverAnArray(t *testing.T) {
+	nums := []int{6, 6, 4, 4}
+	assert.Equal(t, -8, CalculateSumOfAllPairs(nums))
+	nums = []int{1, 2, 3, 1, 3}
+	assert.Equal(t, 4, CalculateSumOfAllPairs(nums))
+}

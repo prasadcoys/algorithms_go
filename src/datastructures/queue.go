@@ -28,3 +28,17 @@ func (q *Queue) Dequeue() int {
 func (q *Queue) Peek() int {
 	return q.data.PeekFirst()
 }
+
+func ReverseFirstKElements(queue *Queue, num int) {
+	reversestack := Stack{}
+	for i := 0; i < num; i++ {
+		reversestack.Push((*queue).Dequeue())
+	}
+	for i := 0; i < num; i++ {
+		element, _ := reversestack.Pop()
+		(*queue).Enqueue(element)
+	}
+	for i := num; i < (*queue).Size(); i++ {
+		(*queue).Enqueue((*queue).Dequeue())
+	}
+}

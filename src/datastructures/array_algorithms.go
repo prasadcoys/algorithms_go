@@ -79,3 +79,16 @@ func MinimumRequiredForBalancing(numbers []int) int {
 	}
 	return differential
 }
+
+func CalculateSumOfAllPairs(nums []int) int {
+	sum := 0
+	for i := len(nums) - 1; i > -1; i-- {
+		for j := i - 1; j >= 0; j-- {
+			difference := nums[i] - nums[j]
+			if (difference < 0 && difference < -1) || (difference > 0 && difference > 1) {
+				sum = sum + difference
+			}
+		}
+	}
+	return sum
+}

@@ -1,6 +1,10 @@
 package datastructures
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/stretchr/testify/assert"
+)
 
 func TestIfEmptyQueueIsCreated(t *testing.T) {
 	queue := Queue{}
@@ -59,4 +63,29 @@ func TestIfPeekWorks(t *testing.T) {
 	if queue.Peek() != 2 {
 		t.FailNow()
 	}
+}
+
+func TestIfWeCanReverseFirstThreeElementsOfAQueue(t *testing.T) {
+	queue := Queue{}
+	queue.Enqueue(1)
+	queue.Enqueue(2)
+	queue.Enqueue(3)
+	queue.Enqueue(4)
+	queue.Enqueue(5)
+
+	ReverseFirstKElements(&queue, 3)
+	assert.Equal(t, "3 2 1 4 5", queue.data.ToString())
+
+}
+
+func TestIfWeCanReverseAllElementsOfAQueue(t *testing.T) {
+	queue := Queue{}
+	queue.Enqueue(4)
+	queue.Enqueue(3)
+	queue.Enqueue(2)
+	queue.Enqueue(1)
+
+	ReverseFirstKElements(&queue, 4)
+	assert.Equal(t, "1 2 3 4", queue.data.ToString())
+
 }
