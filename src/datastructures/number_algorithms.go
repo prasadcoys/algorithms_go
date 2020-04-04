@@ -85,3 +85,20 @@ func AtoI(text string) int {
 	}
 	return number
 }
+
+func IsNumberPalindrome(num int) bool {
+	tNum := num
+	if num < 0 {
+		return false
+	}
+	reversedNumber := 0
+	for {
+		if num == 0 {
+			break
+		}
+		reversedNumber = reversedNumber*10 + num%10
+		num = num / 10
+
+	}
+	return (tNum - reversedNumber) == 0
+}

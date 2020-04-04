@@ -71,12 +71,22 @@ func TestIfNumberGreaterThanInt32RangeIsCheckedForOverflow(t *testing.T) {
 	assert.Equal(t, 2147483647, AtoI(text))
 }
 
-func TestIfExpressionIsIgnoredt(t *testing.T) {
-	text := "1-0"
-	assert.Equal(t, 0, AtoI(text))
-}
-
 func TestIfDoubleSignsAreIgnored(t *testing.T) {
 	text := " ++1"
 	assert.Equal(t, 0, AtoI(text))
+}
+
+func TestIfNegativeNumberIsNotPalindrome(t *testing.T) {
+	num := -121
+	assert.Equal(t, false, IsNumberPalindrome(num))
+}
+
+func TestIfPositivePalindromNumberReturnsTrue(t *testing.T) {
+	num := 121
+	assert.Equal(t, true, IsNumberPalindrome(num))
+}
+
+func TestIfPositiveNonPalidromeNumberReturnsFalse(t *testing.T) {
+	num := 123
+	assert.Equal(t, false, IsNumberPalindrome(num))
 }
