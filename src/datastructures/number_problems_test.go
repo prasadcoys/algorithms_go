@@ -60,3 +60,23 @@ func TestIfPositiveNumberStringWithPlusSignIsCorrectlyTransformed(t *testing.T) 
 	text := "+42"
 	assert.Equal(t, 42, AtoI(text))
 }
+
+func TestIfStringWithPlusAndMinusSignIsCorrectlyTransformed(t *testing.T) {
+	text := "+-42"
+	assert.Equal(t, 0, AtoI(text))
+}
+
+func TestIfNumberGreaterThanInt32RangeIsCheckedForOverflow(t *testing.T) {
+	text := "9223372036854775808"
+	assert.Equal(t, 2147483647, AtoI(text))
+}
+
+func TestIfExpressionIsIgnoredt(t *testing.T) {
+	text := "1-0"
+	assert.Equal(t, 0, AtoI(text))
+}
+
+func TestIfDoubleSignsAreIgnored(t *testing.T) {
+	text := " ++1"
+	assert.Equal(t, 0, AtoI(text))
+}

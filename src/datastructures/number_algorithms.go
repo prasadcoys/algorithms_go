@@ -1,7 +1,9 @@
 package datastructures
 
 import (
+	"fmt"
 	"math"
+	"strings"
 )
 
 func ReverseNumber(number int) int {
@@ -20,8 +22,10 @@ func ReverseNumber(number int) int {
 }
 
 func AtoI(text string) int {
-
+	text = strings.TrimSpace(text)
 	isNegative := false
+	isPositive := false
+	numberStarted := false
 	numbersMap := make(map[int]int)
 	numbersMap[45] = -1
 	number := 0
@@ -33,19 +37,43 @@ func AtoI(text string) int {
 	}
 
 	for _, c := range text {
-		if c == 32 || c == 43 {
+		if c == 32 {
+			break
+		}
+		if c == 43 {
+			if numberStarted {
+				break
+			}
+			if isNegative || isPositive {
+				break
+			}
+			isPositive = true
 			continue
 		}
+
 		numberInInteger, ok := numbersMap[int(c)]
 		if !ok {
 			break
 		}
 		if numberInInteger < 0 {
+			if numberStarted {
+				break
+			}
+			if isPositive || isNegative {
+				break
+			}
 			isNegative = true
 			continue
 		}
+		numberStarted = true
+
 		number = (number * 10) + numberInInteger
+		if number*-1 < math.MinInt32 {
+			break
+		}
+		fmt.Println(number)
 	}
+
 	if isNegative {
 		if number*-1 < math.MinInt32 {
 			return math.MinInt32
