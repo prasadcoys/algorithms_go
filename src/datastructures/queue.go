@@ -42,3 +42,22 @@ func ReverseFirstKElements(queue *Queue, num int) {
 		(*queue).Enqueue((*queue).Dequeue())
 	}
 }
+
+func ReverseQueue(queue *Queue) {
+	stack := Stack{}
+	for {
+		if (*queue).IsEmpty() {
+			break
+		}
+		num := (*queue).Dequeue()
+		stack.Push(num)
+
+	}
+	for {
+		if stack.IsEmpty() {
+			break
+		}
+		num, _ := stack.Pop()
+		(*queue).Enqueue(num)
+	}
+}

@@ -89,3 +89,14 @@ func TestIfWeCanReverseAllElementsOfAQueue(t *testing.T) {
 	assert.Equal(t, "1 2 3 4", queue.data.ToString())
 
 }
+
+func TestIfWeCanReverseElementsOfQueu(t *testing.T) {
+	queue := Queue{}
+	queue.Enqueue(4)
+	queue.Enqueue(3)
+	queue.Enqueue(2)
+	queue.Enqueue(1)
+
+	ReverseQueue(&queue)
+	assert.Equal(t, "1 2 3 4", queue.data.ToString())
+}
