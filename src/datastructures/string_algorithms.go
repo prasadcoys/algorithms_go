@@ -40,3 +40,37 @@ func buildZigZagArray(text string, num int) [][]string {
 
 	return texts
 }
+
+func FindLongestCommonPrefix(texts []string) string {
+	if len(texts) < 1 {
+		return ""
+	}
+	positions := []rune{}
+	endPosition := -1
+	for _, character := range texts[0] {
+		positions = append(positions, character)
+		endPosition = endPosition + 1
+	}
+	for index, text := range texts {
+		if index == 0 {
+			continue
+		}
+		currPosition := -1
+		if len(text)-1 < endPosition {
+			endPosition = len(text) - 1
+		}
+		for _, character := range text {
+
+			if currPosition+1 > endPosition {
+				break
+			}
+			if character != positions[currPosition+1] {
+				endPosition = currPosition
+				break
+			}
+			currPosition = currPosition + 1
+		}
+	}
+
+	return texts[0][:endPosition+1]
+}

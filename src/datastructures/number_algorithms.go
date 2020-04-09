@@ -1,7 +1,6 @@
 package datastructures
 
 import (
-	"fmt"
 	"math"
 	"strings"
 )
@@ -71,7 +70,6 @@ func AtoI(text string) int {
 		if number*-1 < math.MinInt32 {
 			break
 		}
-		fmt.Println(number)
 	}
 
 	if isNegative {
@@ -101,4 +99,27 @@ func IsNumberPalindrome(num int) bool {
 
 	}
 	return (tNum - reversedNumber) == 0
+}
+
+func ConvertRomanNumberToInteger(roman string) int {
+	romanToNumbers := make(map[rune]int, 0)
+	romanToNumbers['I'] = 1
+	romanToNumbers['V'] = 5
+	romanToNumbers['X'] = 10
+	romanToNumbers['L'] = 50
+	romanToNumbers['C'] = 100
+	romanToNumbers['D'] = 500
+	romanToNumbers['M'] = 1000
+	number := 0
+	prevDigit := 0
+	for _, digit := range roman {
+		currentNumber := romanToNumbers[digit]
+		if currentNumber > prevDigit {
+			number = number - prevDigit + currentNumber - prevDigit
+		} else {
+			number = number + currentNumber
+		}
+		prevDigit = currentNumber
+	}
+	return number
 }

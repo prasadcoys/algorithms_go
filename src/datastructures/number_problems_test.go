@@ -90,3 +90,28 @@ func TestIfPositiveNonPalidromeNumberReturnsFalse(t *testing.T) {
 	num := 123
 	assert.Equal(t, false, IsNumberPalindrome(num))
 }
+
+func TestIfRomanLetterICanBeConverted(t *testing.T) {
+	romanNumber := "I"
+	assert.Equal(t, 1, ConvertRomanNumberToInteger(romanNumber))
+}
+
+func TestIfRomanLetterIIICanBeConverted(t *testing.T) {
+	romanNumber := "LVIII"
+	assert.Equal(t, 58, ConvertRomanNumberToInteger(romanNumber))
+}
+
+func TestIfRomanLetterIXCanBeConverted(t *testing.T) {
+	romanNumber := "IX"
+	assert.Equal(t, 9, ConvertRomanNumberToInteger(romanNumber))
+}
+
+func TestIfRomanCMCanBeConverted(t *testing.T) {
+	romanNumber := "CM"
+	assert.Equal(t, 900, ConvertRomanNumberToInteger(romanNumber))
+}
+
+func TestIfMCMXCIVCanBeConverted(t *testing.T) {
+	romanNumber := "MCMXCIV"
+	assert.Equal(t, 1994, ConvertRomanNumberToInteger(romanNumber))
+}

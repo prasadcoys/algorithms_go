@@ -21,3 +21,28 @@ func TestIfStringWithMultipleCharactersForFourRows(t *testing.T) {
 	text := "PAYPALISHIRING"
 	assert.Equal(t, "PINALSIGYAHRPI", ZigZagText(text, 4))
 }
+
+func TestIfWeCanFindLongestCommonPrefix(t *testing.T) {
+	texts := []string{"flower", "flow", "flight"}
+	assert.Equal(t, "fl", FindLongestCommonPrefix(texts))
+}
+
+func TestIfWeCanFindLongestCommonPrefixWhenNonExists(t *testing.T) {
+	texts := []string{"car", "flow", "animal"}
+	assert.Equal(t, "", FindLongestCommonPrefix(texts))
+}
+
+func TestIFWeReturnFullStringWhnAllStringsAreEqual(t *testing.T) {
+	texts := []string{"car", "car", "car"}
+	assert.Equal(t, "car", FindLongestCommonPrefix(texts))
+}
+
+func TestIfWeReturnEmptyWhenNoArrayIsEmpty(t *testing.T) {
+	texts := []string{}
+	assert.Equal(t, "", FindLongestCommonPrefix(texts))
+}
+
+func TestIFWeReturnFullStringWhenFirstStringIsEmpty(t *testing.T) {
+	texts := []string{"", "car", "car"}
+	assert.Equal(t, "", FindLongestCommonPrefix(texts))
+}
