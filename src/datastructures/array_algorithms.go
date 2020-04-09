@@ -1,5 +1,10 @@
 package datastructures
 
+import (
+	"fmt"
+	"sort"
+)
+
 func DoesPairMakingGivenSumExistsIn(entries []int, sum int) bool {
 	i := 0
 	j := len(entries) - 1
@@ -17,6 +22,27 @@ func DoesPairMakingGivenSumExistsIn(entries []int, sum int) bool {
 		}
 	}
 	return false
+}
+
+func GetPairMakingGivenSumExistsIn(entries []int, sum int) [][]int {
+	i := 0
+	pairs := [][]int{}
+	j := len(entries) - 1
+	for {
+		if i >= j {
+			break
+		}
+		currentSum := entries[i] + entries[j]
+		if currentSum == sum {
+			pairs = append(pairs, []int{entries[i], entries[j]})
+			i++
+		} else if currentSum > sum {
+			j--
+		} else if currentSum < sum {
+			i++
+		}
+	}
+	return pairs
 }
 
 func MergeTwoSortedArrays(array_1 []int, array_2 []int) []int {
@@ -91,4 +117,29 @@ func CalculateSumOfAllPairs(nums []int) int {
 		}
 	}
 	return sum
+}
+
+func FindTripletsWithSumZero(nums []int) [][]int {
+	triplets := [][]int{}
+	sort.Ints(nums)
+	counter := 0
+	numWithTriplet := make(map[int]int, 0)
+	for _, num := range nums {
+		diff := 0 - num
+		pairs := GetPairMakingGivenSumExistsIn(nums[counter+1:], diff)
+		_, ok := numWithTriplet[num]
+		for _, pair := range pairs {
+			if len(pair) > 0 {
+				pair = append(pair, num)
+				fmt.Println(pair)
+				if ok && (numWithTriplet[num] == pair[0] || numWithTriplet[num] == pair[1]) {
+					continue
+				}
+				triplets = append(triplets, pair)
+				numWithTriplet[num] = pair[0]
+			}
+		}
+		counter = counter + 1
+	}
+	return triplets
 }

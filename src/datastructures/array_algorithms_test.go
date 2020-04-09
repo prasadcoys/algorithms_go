@@ -1,6 +1,7 @@
 package datastructures
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -54,4 +55,16 @@ func TestIfSumOfAllPairsOverAnArray(t *testing.T) {
 	assert.Equal(t, -8, CalculateSumOfAllPairs(nums))
 	nums = []int{1, 2, 3, 1, 3}
 	assert.Equal(t, 4, CalculateSumOfAllPairs(nums))
+}
+
+func TestIfThreeSumWithValidEntriesIsCalculated(t *testing.T) {
+	nums := []int{-1, 0, 1, 2, -1, -4}
+	fmt.Println(FindTripletsWithSumZero(nums))
+
+}
+
+func TestIfThreeSumWithAllZeroEntriesIsCalculated(t *testing.T) {
+	nums := []int{0, 0, 0, 0}
+	fmt.Println(FindTripletsWithSumZero(nums))
+
 }
