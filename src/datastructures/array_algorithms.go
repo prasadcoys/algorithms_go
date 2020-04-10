@@ -1,6 +1,7 @@
 package datastructures
 
 import (
+	"fmt"
 	"sort"
 )
 
@@ -28,8 +29,14 @@ func GetPairMakingGivenSumExistsIn(entries []int, sum int) [][]int {
 	pairs := [][]int{}
 	j := len(entries) - 1
 	for {
+
 		if i >= j {
 			break
+		}
+		if i > 0 && entries[i] == entries[i-1] {
+			i = i + 1
+			continue
+
 		}
 		currentSum := entries[i] + entries[j]
 		if currentSum == sum {
@@ -122,34 +129,22 @@ func FindTripletsWithSumZero(nums []int) [][]int {
 	triplets := [][]int{}
 	sort.Ints(nums)
 	counter := 0
-	numWithTriplet := make(map[int][]int, 0)
 	for _, num := range nums {
+		if counter > 0 && nums[counter] == nums[counter-1] {
+			fmt.Println("skipping ", nums[counter])
+			counter = counter + 1
+			continue
+		}
 		diff := 0 - num
 		pairs := GetPairMakingGivenSumExistsIn(nums[counter+1:], diff)
 
 		for _, pair := range pairs {
 			if len(pair) > 0 {
 				pair = append(pair, num)
-				if isPairAlreadyPresent(num, pair[0], numWithTriplet) {
-					continue
-				}
 				triplets = append(triplets, pair)
-				numWithTriplet[num] = append(numWithTriplet[num], pair[0])
 			}
 		}
 		counter = counter + 1
 	}
 	return triplets
-}
-
-func isPairAlreadyPresent(num int, pairNum int, numWithTriplet map[int][]int) bool {
-	entries, ok := numWithTriplet[num]
-	if ok {
-		for _, entry := range entries {
-			if pairNum == entry {
-				return true
-			}
-		}
-	}
-	return false
 }
