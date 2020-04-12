@@ -2,6 +2,7 @@ package datastructures
 
 import (
 	"fmt"
+	"math"
 	"sort"
 )
 
@@ -147,4 +148,64 @@ func FindTripletsWithSumZero(nums []int) [][]int {
 		counter = counter + 1
 	}
 	return triplets
+}
+
+func FindTripletsWithSumClosestTo(nums []int, target int) int {
+	count := len(nums)
+	closestSum := math.MaxInt32
+	closestDiff := math.MaxInt32
+
+	sort.Ints(nums)
+	for i := 0; i < count-2; i++ {
+		diffToTarget := target - nums[i]
+		currentSum := nums[i] + diffToTarget - GetClosestSum(nums[i+1:], diffToTarget)
+		// if int(math.Abs(float64(target-currentSum))) < closestDiff {
+		// 	closestDiff = int(math.Abs(float64(target - currentSum)))
+		// 	closestSum = currentSum
+		// }
+		absoluteDifference := Modulus(target - currentSum)
+		if absoluteDifference < closestDiff {
+			closestDiff = absoluteDifference
+			closestSum = currentSum
+		}
+
+	}
+	return closestSum
+}
+
+func GetClosestSum(entries []int, sum int) int {
+	i := 0
+	j := len(entries) - 1
+	currentSum := 0
+	leastDiff := math.MaxInt32
+	for {
+		if i >= j {
+			break
+		}
+		currentSum = entries[i] + entries[j]
+		// if math.Abs(float64(leastDiff)) > math.Abs(float64(sum-currentSum)) {
+		// 	leastDiff = sum - currentSum
+		// }
+		if Modulus(leastDiff) > Modulus(sum-currentSum) {
+			leastDiff = sum - currentSum
+		}
+
+		// leastDiff = int(math.Min(math.Abs(float64(sum-currentSum)), math.Abs(float64(leastDiff))))
+		if currentSum == sum {
+			return 0
+		} else if currentSum > sum {
+			j--
+		} else if currentSum < sum {
+			i++
+		}
+	}
+
+	return leastDiff
+}
+
+func Modulus(num int) int {
+	if num < 0 {
+		return -1 * num
+	}
+	return num
 }

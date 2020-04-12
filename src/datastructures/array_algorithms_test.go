@@ -74,3 +74,41 @@ func TestIfArrayWithLargeNumbersWorksCorrectly(t *testing.T) {
 	nums := []int{-4, -2, -2, -2, 0, 1, 2, 2, 2, 3, 3, 4, 4, 6, 6}
 	fmt.Println(FindTripletsWithSumZero(nums))
 }
+
+func TestIf3SumClosestToTargetIsReturnedForSmallArray(t *testing.T) {
+	nums := []int{-1, 2, 1, -4}
+	actual := FindTripletsWithSumClosestTo(nums, 1)
+
+	assert.Equal(t, 2, actual)
+}
+
+func TestIf3SumClosestToTargetIsReturnedWhenExactMatchIsFound(t *testing.T) {
+	nums := []int{0, 1, 2}
+	actual := FindTripletsWithSumClosestTo(nums, 3)
+
+	assert.Equal(t, 3, actual)
+}
+
+func TestIf3SumClosestToTargetIsReturnedWhenExactMatchIsFoundWithDuplicatesInEntries(t *testing.T) {
+	nums := []int{1, 1, -1, -1, 3}
+	actual := FindTripletsWithSumClosestTo(nums, -1)
+
+	assert.Equal(t, -1, actual)
+}
+
+func TestIf3SumClosestToTargetIsReturnedWhenNoExactMatchWithAVeryLargeElemetn(t *testing.T) {
+	nums := []int{-1, 0, 1, 1, 55}
+	actual := FindTripletsWithSumClosestTo(nums, 3)
+
+	assert.Equal(t, 2, actual)
+}
+
+func TestIfLeastDiffWorks(t *testing.T) {
+	nums := []int{1, 2}
+	fmt.Println(GetClosestSum(nums, 2))
+}
+
+func TestIfModulusWorksCorrectly(t *testing.T) {
+	assert.Equal(t, 1, Modulus(-1))
+	assert.Equal(t, 1, Modulus(1))
+}
