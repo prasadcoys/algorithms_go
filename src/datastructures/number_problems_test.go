@@ -115,3 +115,39 @@ func TestIfMCMXCIVCanBeConverted(t *testing.T) {
 	romanNumber := "MCMXCIV"
 	assert.Equal(t, 1994, ConvertRomanNumberToInteger(romanNumber))
 }
+
+func TestIf1IsConvertedIntoI(t *testing.T) {
+	assert.Equal(t, "I", ConvertIntegerToRomanNumber(1))
+}
+
+func TestIf3IsConvertedIntoIII(t *testing.T) {
+	assert.Equal(t, "III", ConvertIntegerToRomanNumber(3))
+}
+
+func TestIf4IsConvertedToIV(t *testing.T) {
+	assert.Equal(t, "IV", ConvertIntegerToRomanNumber(4))
+}
+
+func TestIf10IsConvertedToX(t *testing.T) {
+	assert.Equal(t, "X", ConvertIntegerToRomanNumber(10))
+}
+
+func TestIf19IsConvertedToXIX(t *testing.T) {
+	assert.Equal(t, "XIX", ConvertIntegerToRomanNumber(19))
+}
+
+func TestIf3000IsConvertedToMMM(t *testing.T) {
+	assert.Equal(t, "MMM", ConvertIntegerToRomanNumber(3000))
+}
+
+func TestIf3400IsConvertedToMMMCD(t *testing.T) {
+	assert.Equal(t, "MMMCD", ConvertIntegerToRomanNumber(3400))
+}
+
+func TestIf3900IsConvertedToMMMD(t *testing.T) {
+	assert.Equal(t, "MMMCM", ConvertIntegerToRomanNumber(3900))
+}
+
+func TestIf1994IsConvertedToMCMXCIV(t *testing.T) {
+	assert.Equal(t, "MCMXCIV", ConvertIntegerToRomanNumber(1994))
+}

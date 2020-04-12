@@ -1,6 +1,7 @@
 package datastructures
 
 import (
+	"fmt"
 	"math"
 	"strings"
 )
@@ -122,4 +123,44 @@ func ConvertRomanNumberToInteger(roman string) int {
 		prevDigit = currentNumber
 	}
 	return number
+}
+
+func ConvertIntegerToRomanNumber(number int) string {
+	romanNumber := ""
+	numbersToRoman := make(map[int]string, 7)
+	numbersToRoman[1000] = "M"
+	numbersToRoman[500] = "D"
+	numbersToRoman[100] = "C"
+	numbersToRoman[50] = "L"
+	numbersToRoman[10] = "X"
+	numbersToRoman[5] = "V"
+	numbersToRoman[1] = "I"
+	keys := []int{1000, 500, 100, 50, 10, 5, 1}
+
+	for _, key := range keys {
+		if number == 0 {
+			break
+		}
+		digit := number / key
+		for i := 0; i < digit; i++ {
+			romanNumber = romanNumber + numbersToRoman[key]
+		}
+		number = number % key
+		if key > 1 {
+			penultimateDigit := number / (key - (key / 10))
+			if penultimateDigit == 1 {
+				romanNumber = romanNumber + numbersToRoman[key/10] + numbersToRoman[key]
+				number = number % (key - (key / 10))
+			}
+			penultimateDigit = number / (key - (key / 5))
+			fmt.Println(penultimateDigit, number, key)
+			if penultimateDigit == 1 {
+				romanNumber = romanNumber + numbersToRoman[key/5] + numbersToRoman[key]
+				number = number % (key - (key / 5))
+			}
+		}
+
+	}
+	return romanNumber
+
 }
