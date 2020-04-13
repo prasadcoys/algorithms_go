@@ -151,3 +151,8 @@ func TestIf3900IsConvertedToMMMD(t *testing.T) {
 func TestIf1994IsConvertedToMCMXCIV(t *testing.T) {
 	assert.Equal(t, "MCMXCIV", ConvertIntegerToRomanNumber(1994))
 }
+
+func TestIfWeCanPrintAllPossibleLetterCombinationsOf2FromThePhonePad(t *testing.T) {
+	expectedCombinations := []string{"a", "b", "c"}
+	assert.Equal(t, expectedCombinations, GetAllPossibleCombinationsOfPhonePadNumber("23"))
+}

@@ -154,3 +154,46 @@ func ConvertIntegerToRomanNumber(number int) string {
 	return strings.Join(romans, "")
 
 }
+
+func GetAllPossibleCombinationsOfPhonePadNumber(phoneNumber string) []string {
+	phonePad := make(map[string][]string, 0)
+	phonePad["2"] = []string{"a", "b", "c"}
+	phonePad["3"] = []string{"d", "e", "f"}
+	phonePad["4"] = []string{"g", "h", "i"}
+	phonePad["5"] = []string{"j", "k", "l"}
+	phonePad["6"] = []string{"m", "n", "o"}
+	phonePad["7"] = []string{"p", "q", "r", "s"}
+	phonePad["8"] = []string{"t", "u", "v"}
+	phonePad["9"] = []string{"w", "x", "y", "z"}
+	combinations := []string{}
+	noOfCombinations := 1
+	phoneDigits := []string{}
+	for _, digit := range phoneNumber {
+		phoneDigit := string(digit)
+		noOfCombinations = noOfCombinations * len(phonePad[phoneDigit])
+		for i := 0; i < noOfCombinations; i++ {
+			combinations = append(combinations, "")
+		}
+		phoneDigits = append(phoneDigits, phoneDigit)
+	}
+
+	for _, digit := range phoneDigits {
+		lettersForDigit := phonePad[digit]
+		i := 0
+		j := 0
+		for index, text := range combinations {
+			text = text + lettersForDigit[j]
+			combinations[index] = text
+			if i+1 == noOfCombinations/3 {
+
+				j = j + 1
+				i = 0
+				continue
+			}
+
+			i = i + 1
+		}
+		noOfCombinations = noOfCombinations / 3
+	}
+	return combinations
+}
