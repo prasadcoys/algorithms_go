@@ -128,8 +128,8 @@ func TestIf4IsConvertedToIV(t *testing.T) {
 	assert.Equal(t, "IV", ConvertIntegerToRomanNumber(4))
 }
 
-func TestIf10IsConvertedToX(t *testing.T) {
-	assert.Equal(t, "X", ConvertIntegerToRomanNumber(10))
+func TestIf18IsConvertedToVIII(t *testing.T) {
+	assert.Equal(t, "VIII", ConvertIntegerToRomanNumber(8))
 }
 
 func TestIf19IsConvertedToXIX(t *testing.T) {
