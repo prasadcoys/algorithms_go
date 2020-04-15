@@ -203,3 +203,34 @@ func GetAllPossibleCombinationsOfPhonePadNumber(phoneNumber string) []string {
 	}
 	return combinations
 }
+
+func GetAllPossibleCombinationsOfPhonePadNumberRec(phoneNumber string) []string {
+	output := []string{}
+	if len(phoneNumber) == 0 {
+		return output
+	}
+	phonePad := make(map[string][]string, 0)
+	phonePad["2"] = []string{"a", "b", "c"}
+	phonePad["3"] = []string{"d", "e", "f"}
+	phonePad["4"] = []string{"g", "h", "i"}
+	phonePad["5"] = []string{"j", "k", "l"}
+	phonePad["6"] = []string{"m", "n", "o"}
+	phonePad["7"] = []string{"p", "q", "r", "s"}
+	phonePad["8"] = []string{"t", "u", "v"}
+	phonePad["9"] = []string{"w", "x", "y", "z"}
+
+	getPhoneNumbersRecursively(phonePad, &output, "", phoneNumber)
+	return output
+}
+
+func getPhoneNumbersRecursively(phonePad map[string][]string, output *[]string, base string, phoneNumber string) {
+	if len(phoneNumber) == 0 {
+		*output = append(*output, base)
+		return
+	}
+	phoneDigit := phoneNumber[0:1]
+	characters := phonePad[phoneDigit]
+	for _, character := range characters {
+		getPhoneNumbersRecursively(phonePad, output, base+character, phoneNumber[1:])
+	}
+}
