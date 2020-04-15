@@ -152,7 +152,28 @@ func TestIf1994IsConvertedToMCMXCIV(t *testing.T) {
 	assert.Equal(t, "MCMXCIV", ConvertIntegerToRomanNumber(1994))
 }
 
+func TestIfWeCanPrintAllPossibleLetterCombinationsOf23FromThePhonePad(t *testing.T) {
+	expectedCombinations := []string{"ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"}
+	assert.Equal(t, expectedCombinations, GetAllPossibleCombinationsOfPhonePadNumber("23"))
+}
+
+func TestIfWeCanPrintAllPossibleLetterCombinationsOfEmptyFromThePhonePad(t *testing.T) {
+	expectedCombinations := []string{}
+	assert.Equal(t, expectedCombinations, GetAllPossibleCombinationsOfPhonePadNumber(""))
+}
+
 func TestIfWeCanPrintAllPossibleLetterCombinationsOf2FromThePhonePad(t *testing.T) {
 	expectedCombinations := []string{"a", "b", "c"}
-	assert.Equal(t, expectedCombinations, GetAllPossibleCombinationsOfPhonePadNumber("23"))
+	assert.Equal(t, expectedCombinations, GetAllPossibleCombinationsOfPhonePadNumber("2"))
+}
+
+func TestIfWeCanPrintAllPossibleLetterCombinationsOf999FromThePhonePad(t *testing.T) {
+	expectedCombinations := []string{"www", "wwx", "wwy", "wwz", "wxw", "wxx", "wxy", "wxz", "wyw", "wyx", "wyy", "wyz", "wzw", "wzx", "wzy", "wzz", "xww", "xwx", "xwy", "xwz", "xxw", "xxx", "xxy", "xxz", "xyw", "xyx", "xyy", "xyz", "xzw", "xzx", "xzy", "xzz", "yww", "ywx", "ywy", "ywz", "yxw", "yxx", "yxy", "yxz", "yyw", "yyx", "yyy", "yyz", "yzw", "yzx", "yzy", "yzz", "zww", "zwx", "zwy", "zwz", "zxw", "zxx", "zxy", "zxz", "zyw", "zyx", "zyy", "zyz", "zzw", "zzx", "zzy", "zzz"}
+	assert.Equal(t, expectedCombinations, GetAllPossibleCombinationsOfPhonePadNumber("999"))
+}
+
+func TestIfWeCanPrintAllPossibleLetterCombinationsOf2to9FromThePhonePad(t *testing.T) {
+	// expectedCombinations := []string{"www", "wwx", "wwy", "wwz", "wxw", "wxx", "wxy", "wxz", "wyw", "wyx", "wyy", "wyz", "wzw", "wzx", "wzy", "wzz", "xww", "xwx", "xwy", "xwz", "xxw", "xxx", "xxy", "xxz", "xyw", "xyx", "xyy", "xyz", "xzw", "xzx", "xzy", "xzz", "yww", "ywx", "ywy", "ywz", "yxw", "yxx", "yxy", "yxz", "yyw", "yyx", "yyy", "yyz", "yzw", "yzx", "yzy", "yzz", "zww", "zwx", "zwy", "zwz", "zxw", "zxx", "zxy", "zxz", "zyw", "zyx", "zyy", "zyz", "zzw", "zzx", "zzy", "zzz"}
+	// assert.Equal(t, expectedCombinations, GetAllPossibleCombinationsOfPhonePadNumber("999"))
+	GetAllPossibleCombinationsOfPhonePadNumber("23456789")
 }

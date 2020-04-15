@@ -156,6 +156,7 @@ func ConvertIntegerToRomanNumber(number int) string {
 }
 
 func GetAllPossibleCombinationsOfPhonePadNumber(phoneNumber string) []string {
+	instrumentation := 0
 	phonePad := make(map[string][]string, 0)
 	phonePad["2"] = []string{"a", "b", "c"}
 	phonePad["3"] = []string{"d", "e", "f"}
@@ -171,29 +172,34 @@ func GetAllPossibleCombinationsOfPhonePadNumber(phoneNumber string) []string {
 	for _, digit := range phoneNumber {
 		phoneDigit := string(digit)
 		noOfCombinations = noOfCombinations * len(phonePad[phoneDigit])
-		for i := 0; i < noOfCombinations; i++ {
-			combinations = append(combinations, "")
-		}
 		phoneDigits = append(phoneDigits, phoneDigit)
+		instrumentation = instrumentation + 1
 	}
+	if noOfCombinations == 1 {
+		return combinations
+	}
+	for i := 0; i < noOfCombinations; i++ {
+		combinations = append(combinations, "")
 
+	}
 	for _, digit := range phoneDigits {
 		lettersForDigit := phonePad[digit]
 		i := 0
 		j := 0
 		for index, text := range combinations {
+			instrumentation = instrumentation + 1
 			text = text + lettersForDigit[j]
 			combinations[index] = text
-			if i+1 == noOfCombinations/3 {
+			if i+1 == noOfCombinations/len(lettersForDigit) {
 
-				j = j + 1
+				j = (j + 1) % len(lettersForDigit)
 				i = 0
 				continue
 			}
 
 			i = i + 1
 		}
-		noOfCombinations = noOfCombinations / 3
+		noOfCombinations = noOfCombinations / len(lettersForDigit)
 	}
 	return combinations
 }
