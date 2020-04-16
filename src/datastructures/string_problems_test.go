@@ -46,3 +46,15 @@ func TestIFWeReturnFullStringWhenFirstStringIsEmpty(t *testing.T) {
 	texts := []string{"", "car", "car"}
 	assert.Equal(t, "", FindLongestCommonPrefix(texts))
 }
+
+func TestIfValidParanthesesReturnsTrue(t *testing.T) {
+	assert.Equal(t, true, IsValidParantheses("()"))
+	assert.Equal(t, true, IsValidParantheses("()[]{}"))
+	assert.Equal(t, true, IsValidParantheses("{[]}"))
+}
+
+func TestIfInvalidParanthesesReturnsFalse(t *testing.T) {
+	assert.Equal(t, false, IsValidParantheses(")("))
+	assert.Equal(t, false, IsValidParantheses("(]"))
+	assert.Equal(t, false, IsValidParantheses("([)]"))
+}

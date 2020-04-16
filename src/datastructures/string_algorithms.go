@@ -1,5 +1,7 @@
 package datastructures
 
+import "strings"
+
 func ZigZagText(text string, num int) string {
 	zigzagtext := ""
 	texts := buildZigZagArray(text, num)
@@ -73,4 +75,25 @@ func FindLongestCommonPrefix(texts []string) string {
 	}
 
 	return texts[0][:endPosition+1]
+}
+
+func IsValidParantheses(text string) bool {
+
+	tokenMap := make(map[string]string, 3)
+	tokenMap[")"] = "("
+	tokenMap["]"] = "["
+	tokenMap["}"] = "{"
+	tokens := StringStack{}
+	for _, token := range strings.Split(text, "") {
+		matchingToken, ok := tokenMap[token]
+
+		if ok && !tokens.isEmpty() && tokens.peek() == matchingToken {
+			tokens.pop()
+			continue
+		}
+		tokens.push(token)
+
+	}
+
+	return tokens.isEmpty()
 }
