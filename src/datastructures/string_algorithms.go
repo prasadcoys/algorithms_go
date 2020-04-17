@@ -1,6 +1,8 @@
 package datastructures
 
-import "strings"
+import (
+	"strings"
+)
 
 func ZigZagText(text string, num int) string {
 	zigzagtext := ""
@@ -96,4 +98,50 @@ func IsValidParantheses(text string) bool {
 	}
 
 	return tokens.isEmpty()
+}
+
+func GetParanthesesCombination(num int) []string {
+
+	parantheses := []string{}
+	if num == 1 {
+		return []string{"()"}
+	}
+	paranMap := make(map[string]bool, 0)
+	for _, paranthesis := range GetParanthesesCombination(num - 1) {
+		if paranMap[paranthesis+"()"] != true {
+			parantheses = append(parantheses, paranthesis+"()")
+			paranMap[paranthesis+"()"] = true
+		}
+		if paranMap["()"+paranthesis] != true {
+			parantheses = append(parantheses, "()"+paranthesis)
+			paranMap["()"+paranthesis] = true
+		}
+		if paranMap["("+paranthesis+")"] != true {
+			parantheses = append(parantheses, "("+paranthesis+")")
+			paranMap["("+paranthesis+")"] = true
+		}
+		individualBrackets := BracketEverySingleparanthesis(paranthesis)
+		for _, bracket := range individualBrackets {
+			if paranMap[bracket] != true {
+				parantheses = append(parantheses, bracket)
+				paranMap[bracket] = true
+			}
+		}
+	}
+
+	return parantheses
+}
+
+func BracketEverySingleparanthesis(text string) []string {
+	output := []string{}
+	i := 0
+	for {
+		if i > len(text)-1 {
+			break
+		}
+		currentPositionOfBracket := i + strings.Index(text[i:], "()")
+		output = append(output, text[0:currentPositionOfBracket]+"("+text[currentPositionOfBracket:currentPositionOfBracket+2]+")"+text[currentPositionOfBracket+2:])
+		i = currentPositionOfBracket + i + 2
+	}
+	return output
 }

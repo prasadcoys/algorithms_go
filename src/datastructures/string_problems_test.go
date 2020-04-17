@@ -58,3 +58,34 @@ func TestIfInvalidParanthesesReturnsFalse(t *testing.T) {
 	assert.Equal(t, false, IsValidParantheses("(]"))
 	assert.Equal(t, false, IsValidParantheses("([)]"))
 }
+
+func TestIfWeCanGenerateParanthesesFor1(t *testing.T) {
+	expected := []string{"()"}
+	assert.Equal(t, expected, GetParanthesesCombination(1))
+}
+
+func TestIfWeCanGenerateParanthesesFor2(t *testing.T) {
+	expected := []string{"()()", "(())"}
+	assert.Equal(t, expected, GetParanthesesCombination(2))
+}
+
+func TestIfWeCanGenerateParanthesesFor3(t *testing.T) {
+	expected := []string{"((()))",
+		"(()())",
+		"(())()",
+		"()(())",
+		"()()()"}
+	assert.ElementsMatch(t, expected, GetParanthesesCombination(3))
+}
+
+func TestIfWeCanGenerateParanthesesFor4(t *testing.T) {
+	expected := []string{"(((())))", "((()()))", "((())())", "((()))()", "(()(()))", "(()()())", "(()())()", "(())(())", "(())()()", "()((()))", "()(()())", "()(())()", "()()(())", "()()()()"}
+	actual := GetParanthesesCombination(4)
+	assert.ElementsMatch(t, expected, actual)
+}
+
+func TestIfWeCanBracketEverySingleParanthesis(t *testing.T) {
+	expected := []string{"(())()", "()(())"}
+	actual := BracketEverySingleparanthesis("()()")
+	assert.ElementsMatch(t, expected, actual)
+}
