@@ -89,3 +89,24 @@ func TestIfWeCanBracketEverySingleParanthesis(t *testing.T) {
 	actual := BracketEverySingleparanthesis("()()")
 	assert.ElementsMatch(t, expected, actual)
 }
+
+func TestIfLetterCaseCombinationForGeneralCaseWorksCorrectly(t *testing.T) {
+	expected := []string{"a1b2", "a1B2", "A1b2", "A1B2"}
+	assert.ElementsMatch(t, expected, letterCasePermutation("a1b2"))
+}
+
+func TestIfLetterCaseCombinationForCaseWithOnlyOneLetterWorksCorrectly(t *testing.T) {
+	expected := []string{"3z4", "3Z4"}
+	assert.ElementsMatch(t, expected, letterCasePermutation("3z4"))
+}
+
+func TestIfLetterCaseCombinationForCaseWithOnlyLettersWorksCorrectly(t *testing.T) {
+	expected := []string{"12345"}
+	assert.ElementsMatch(t, expected, letterCasePermutation("12345"))
+}
+
+func TestIfLetterCombinationForCaseWithOnlyLettersWorksCorrectly(t *testing.T) {
+	expected := []string{"abc", "abC", "aBc", "aBC", "Abc", "AbC", "ABc", "ABC"}
+	assert.ElementsMatch(t, expected, letterCasePermutation("abc"))
+	assert.ElementsMatch(t, expected, letterCasePermutation("ABC"))
+}
