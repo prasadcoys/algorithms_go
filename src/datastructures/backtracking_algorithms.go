@@ -41,7 +41,18 @@ func recursivelyCalculateTimeCombinations(currentTime string, permutations *[]st
 	if num == 0 {
 		charsLeft := 10 - len(currentTime)
 		currentTime = currentTime + strings.Repeat("0", charsLeft)
-		*permutations = append(*permutations, getTimeFromBinary(currentTime))
+		hoursInInt, minutesInInt := getTimeFromBinary(currentTime)
+		if hoursInInt > 11 || minutesInInt > 59 {
+			return
+		}
+		var minutesPadded string
+		if minutesInInt < 10 {
+			minutesPadded = fmt.Sprintf("%s%d", "0", minutesInInt)
+		} else {
+			minutesPadded = fmt.Sprintf("%d", minutesInInt)
+		}
+		time := fmt.Sprintf("%d%s%s", hoursInInt, ":", minutesPadded)
+		*permutations = append(*permutations, time)
 		return
 	} else if len(currentTime) == 10 {
 		return
@@ -51,19 +62,14 @@ func recursivelyCalculateTimeCombinations(currentTime string, permutations *[]st
 	}
 }
 
-func getTimeFromBinary(timeInBinary string) string {
+func getTimeFromBinary(timeInBinary string) (int64, int64) {
 	hours := timeInBinary[0:4]
 	minutes := timeInBinary[4:]
 	var minutesInInt int64
 	minutesInInt, _ = strconv.ParseInt(minutes, 2, 32)
-	var minutesPadded string
-	if minutesInInt < 10 {
-		minutesPadded = fmt.Sprintf("%s%d", "0", minutesInInt)
-	} else {
-		minutesPadded = fmt.Sprintf("%d", minutesInInt)
-	}
+
 	hoursInInt, _ := strconv.ParseInt(hours, 2, 32)
 	//fmt.Println("" + int(hoursInInt) + ":" + int(minutesInInt))
-	intTime := fmt.Sprintf("%d%s%s", hoursInInt, ":", minutesPadded)
-	return intTime
+
+	return hoursInInt, minutesInInt
 }
