@@ -73,3 +73,52 @@ func getTimeFromBinary(timeInBinary string) (int64, int64) {
 
 	return hoursInInt, minutesInInt
 }
+
+func combinationSum2(candidates []int, target int) [][]int {
+	permutations := [][]int{}
+	recursivelyCalculateCombinationSum2(candidates, target, &permutations, []int{})
+	falseList := candidates
+	falseList[0] = 0
+	recursivelyCalculateCombinationSum2(falseList, target, &permutations, []int{})
+	fmt.Println(permutations)
+	return permutations
+}
+
+func recursivelyCalculateCombinationSum2(candidates []int, target int, permutations *[][]int, currentPermutation []int) {
+	fmt.Println(currentPermutation, target)
+	if len(candidates) == 0 {
+		return
+	}
+	currentPermutation = append(currentPermutation, candidates[0])
+	target = target - candidates[0]
+	if target == 0 {
+		*permutations = append(*permutations, currentPermutation)
+		return
+	}
+	if len(candidates) == 1 {
+		return
+	}
+	recursivelyCalculateCombinationSum2(candidates[1:], target, permutations, currentPermutation)
+	falseList := candidates[1:]
+	falseList[0] = 0
+	recursivelyCalculateCombinationSum2(falseList, target, permutations, currentPermutation)
+	return
+}
+
+func subsets(elements []int) [][]int {
+	subsets := [][]int{}
+	recursivelyAddSubsetToPermutation(&subsets, elements, []int{})
+	return subsets
+}
+
+func recursivelyAddSubsetToPermutation(subsets *[][]int, elements []int, currentList []int) {
+	if len(elements) == 0 {
+		*subsets = append(*subsets, currentList)
+		return
+	}
+	{
+		recursivelyAddSubsetToPermutation(subsets, elements[1:], currentList)
+		recursivelyAddSubsetToPermutation(subsets, elements[1:], append(currentList, elements[0]))
+	}
+	return
+}
