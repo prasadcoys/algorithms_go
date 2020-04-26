@@ -108,6 +108,7 @@ func recursivelyCalculateCombinationSum2(candidates []int, target int, permutati
 func subsets(elements []int) [][]int {
 	subsets := [][]int{}
 	recursivelyAddSubsetToPermutation(&subsets, elements, []int{})
+	fmt.Println(subsets)
 	return subsets
 }
 
@@ -117,6 +118,7 @@ func recursivelyAddSubsetToPermutation(subsets *[][]int, elements []int, current
 		return
 	}
 	{
+
 		recursivelyAddSubsetToPermutation(subsets, elements[1:], currentList)
 		recursivelyAddSubsetToPermutation(subsets, elements[1:], append(currentList, elements[0]))
 	}
