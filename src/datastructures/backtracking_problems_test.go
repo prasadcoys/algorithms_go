@@ -40,22 +40,7 @@ func TestIfBinaryClockTimeCanBePredictedForTwo(t *testing.T) {
 	assert.ElementsMatch(t, expected, readBinaryWatch(2))
 }
 
-func TestIfWeCanSolveCombinationSumWithOutRepitition(t *testing.T) {
-	expected := [][]int{
-		{1, 7},
-		{1, 2, 5},
-		{2, 6},
-		{1, 1, 6},
-	}
-	assert.ElementsMatch(t, expected, combinationSum2([]int{10, 1, 2, 7, 6, 1, 5}, 8))
-}
-
 func TestIfWeCanListAllSubSets(t *testing.T) {
 	expected := [][]int{{1, 2, 3}, {1}, {2}, {3}, {1, 2}, {1, 3}, {2, 3}, {}}
 	assert.ElementsMatch(t, expected, subsets([]int{1, 2, 3}))
-}
-
-func TestIfWeCanListAllSubSetsForBiggerSet(t *testing.T) {
-	expected := [][]int{{}, {9}, {0}, {0, 9}, {3}, {3, 9}, {0, 3}, {0, 3, 9}, {5}, {5, 9}, {0, 5}, {0, 5, 9}, {3, 5}, {3, 5, 9}, {0, 3, 5}, {0, 3, 5, 9}, {7}, {7, 9}, {0, 7}, {0, 7, 9}, {3, 7}, {3, 7, 9}, {0, 3, 7}, {0, 3, 7, 9}, {5, 7}, {5, 7, 9}, {0, 5, 7}, {0, 5, 7, 9}, {3, 5, 7}, {3, 5, 7, 9}, {0, 3, 5, 7}, {0, 3, 5, 7, 9}}
-	assert.ElementsMatch(t, expected, subsets([]int{9, 0, 3, 5, 7}))
 }

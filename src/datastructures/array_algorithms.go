@@ -209,3 +209,13 @@ func Modulus(num int) int {
 	}
 	return num
 }
+
+func remainingelements(numbers []int, currentPosition int) []int {
+	remainingelements := []int{}
+	j := currentPosition + 1
+	for i := 0; i < len(numbers)-1; i++ {
+		remainingelements = append(remainingelements, numbers[j%len(numbers)])
+		j = j + 1
+	}
+	return remainingelements
+}

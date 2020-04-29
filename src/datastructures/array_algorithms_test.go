@@ -112,3 +112,21 @@ func TestIfModulusWorksCorrectly(t *testing.T) {
 	assert.Equal(t, 1, Modulus(-1))
 	assert.Equal(t, 1, Modulus(1))
 }
+
+func TestIfWeCanListAllOtherElementsOfAnArray(t *testing.T) {
+	expected := []int{1, 2}
+	assert.ElementsMatch(t, expected, remainingelements([]int{1, 2, 3}, 2))
+
+}
+
+func TestIfWeCanListAllOtherElementsOfAnArrayWhenAllRemainingElementsAreAfterTheElement(t *testing.T) {
+	expected := []int{2, 3}
+	assert.ElementsMatch(t, expected, remainingelements([]int{1, 2, 3}, 0))
+
+}
+
+func TestIfWeCanListAllOtherElementsOfAnArrayWhenRemainingElementsAreBothBeforeAndAfterTheElement(t *testing.T) {
+	expected := []int{1, 3}
+	assert.ElementsMatch(t, expected, remainingelements([]int{1, 2, 3}, 1))
+
+}
